@@ -93,7 +93,7 @@ public class INESolidFluid extends FlowingFluid {
 	      this.block = new INEFluidBlock(this);
 	      this.block.setRegistryName(ImmersiveNuclearEngineering.MODID, fluidName + "_fluid_block");
 	      INEContent.registeredINEBlocks.add(this.block);
-	      this.bucket = new BucketItem(() -> this.source, (new Item.Properties()).stacksTo(1).tab(ImmersiveEngineering.ITEM_GROUP).craftRemainder(Items.BUCKET))
+	      this.bucket = new BucketItem(() -> this.source, (new Item.Properties()).stacksTo(1).tab(ImmersiveNuclearEngineering.CREATIVE_TAB).craftRemainder(Items.BUCKET))
 	        {
 	          
 	          public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt)
