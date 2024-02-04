@@ -1,0 +1,14 @@
+{
+	"itemGroup.ine":"Immersive Nuclear-Engineering",
+	"itemGroup.ine_molten":"Immersive Nuclear-Engineering Molten Salt Compounds",
+	"fluid.ine.fluorine":"Fluorine Gas",
+	"fluid.ine.deuterium":"Deuterium",
+	"fluid.ine.tritium":"Tritium",
+	"fluid.ine.helium":"Helium",
+	"fluid.ine.helium3":"Helium-3",
+	"item.ine.fluorine":"Bucket of Fluorine Gas",
+	"item.ine.deuterium":"Bucket of Deuterium",
+	"item.ine.tritium":"Bucket of Tritium",
+	"item.ine.helium":"Bucket of Helium",
+	"item.ine.helium3":"Bucket of Helium-3",
+}

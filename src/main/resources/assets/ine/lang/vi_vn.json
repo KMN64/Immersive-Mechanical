@@ -1,0 +1,14 @@
+{
+	"itemGroup.ine":"Immersive Nuclear-Engineering",
+	"itemGroup.ine_molten":"Immersive Nuclear-Engineering Các hợp chất của muối",
+	"fluid.ine.fluorine":"Khí Flo",
+	"fluid.ine.deuterium":"Đơtêri",
+	"fluid.ine.tritium":"Triti",
+	"fluid.ine.helium":"Heli",
+	"fluid.ine.helium3":"Heli-3",
+	"item.ine.fluorine":"Xô khí Flo",
+	"item.ine.deuterium":"Xô Đơtêri",
+	"item.ine.tritium":"Xô Triti",
+	"item.ine.helium":"Xô Heli",
+	"item.ine.helium3":"Xô Heli-3",
+}

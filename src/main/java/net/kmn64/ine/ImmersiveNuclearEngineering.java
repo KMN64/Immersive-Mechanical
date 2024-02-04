@@ -44,6 +44,22 @@ public class ImmersiveNuclearEngineering
 				}
 		
 			};
+			
+			public static final ItemGroup CREATIVE_TAB_MOLTEN = new ItemGroup(MODID+"_molten")
+			{
+
+				@Override
+				public ItemStack makeIcon() {
+					// TODO Auto-generated method stub
+					return new ItemStack(INEContent.Fluids.fluorine.getBucket());
+				}
+				
+				@Override
+				public boolean hasSearchBar() {
+				      return true;
+				}
+		
+			}.setBackgroundSuffix("item_search.png");;
 
     public ImmersiveNuclearEngineering() {
         // Register the setup method for modloading
