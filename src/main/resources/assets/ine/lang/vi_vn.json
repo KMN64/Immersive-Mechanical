@@ -6,9 +6,10 @@
 	"fluid.ine.tritium":"Triti",
 	"fluid.ine.helium":"Heli",
 	"fluid.ine.helium3":"Heli-3",
-	"item.ine.fluorine":"Xô khí Flo",
-	"item.ine.deuterium":"Xô Đơtêri",
-	"item.ine.tritium":"Xô Triti",
-	"item.ine.helium":"Xô Heli",
-	"item.ine.helium3":"Xô Heli-3",
+	"item.ine.fluorine_bucket":"Xô khí Flo",
+	"item.ine.deuterium_bucket":"Xô Đơtêri",
+	"item.ine.tritium_bucket":"Xô Triti",
+	"item.ine.helium_bucket":"Xô Heli",
+	"item.ine.helium3_bucket":"Xô Heli-3",
+	"item.ine.hydrofluoricacid_bucket":"Xô Axít Hydrofluoric"
 }

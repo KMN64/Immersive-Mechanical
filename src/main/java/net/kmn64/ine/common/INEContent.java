@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import net.kmn64.ine.ImmersiveNuclearEngineering;
 import net.kmn64.ine.common.fluids.*;
 import net.minecraft.block.Block;
@@ -50,11 +51,14 @@ public class INEContent {
 	/** block/item/fluid population */
 	public static void populate(){
 		Fluids.fluorine = new INEGaseousFluid("fluorine",0xCEBD89);
-		Fluids.deuterium = new INEGaseousFluid("deuterium",0xCEBD89);
-		Fluids.tritium = new INEGaseousFluid("tritium",0xCEBD89);
-		Fluids.helium = new INEGaseousFluid("helium",0xCEBD89);
-		Fluids.helium3 = new INEGaseousFluid("helium3",0xCEBD89);
+		Fluids.deuterium = new INEGaseousFluid("deuterium",0xFF3232);
+		Fluids.tritium = new INEGaseousFluid("tritium",0x64FF70);
+		Fluids.helium = new INEGaseousFluid("helium",0xE3FFFE);
+		Fluids.helium3 = new INEGaseousFluid("helium3",0xE3FFFE);
 		Fluids.hydrofluoricacid=new INEFluid("hydrofluoricacid",0xA8F1E9, 300, 1000, 1000);
+		
+		//Ready to register multiblock
+		//MultiblockHandler.registerMultiblock(AMultiblock.instance);
 	}
 	
 	public static void preInit(){
