@@ -40,7 +40,7 @@ public class ImmersiveNuclearEngineering
 				@Override
 				public ItemStack makeIcon() {
 					// TODO Auto-generated method stub
-					return null;
+					return new ItemStack(INEContent.Fluids.fluorine.getBucket());
 				}
 		
 			};

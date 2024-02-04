@@ -31,6 +31,11 @@ public class INEContent {
 	}
 	
 	public static class Fluids{
+		public static INEGaseousFluid fluorine;
+		public static INEGaseousFluid deuterium;
+		public static INEGaseousFluid tritium;
+		public static INEGaseousFluid helium;
+		public static INEGaseousFluid helium3;
 		public static INEFluid hydrofluoricacid;
 	}
 	
@@ -44,7 +49,12 @@ public class INEContent {
 	
 	/** block/item/fluid population */
 	public static void populate(){
-		Fluids.hydrofluoricacid=new INEFluid("hydrofluoricacid",0xA8F1E9, 300, 1000, 1000,false);
+		Fluids.fluorine = new INEGaseousFluid("fluorine",0xCEBD89);
+		Fluids.deuterium = new INEGaseousFluid("deuterium",0xCEBD89);
+		Fluids.tritium = new INEGaseousFluid("tritium",0xCEBD89);
+		Fluids.helium = new INEGaseousFluid("helium",0xCEBD89);
+		Fluids.helium3 = new INEGaseousFluid("helium3",0xCEBD89);
+		Fluids.hydrofluoricacid=new INEFluid("hydrofluoricacid",0xA8F1E9, 300, 1000, 1000);
 	}
 	
 	public static void preInit(){

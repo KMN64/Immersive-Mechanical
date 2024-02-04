@@ -12,9 +12,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 
 public class INEGaseousFluid extends IEFluid {
-	public INEGaseousFluid(String name,int color,int temperature,int density,int viscosity) {
+	public INEGaseousFluid(String name,int color) {
 		this(name, new ResourceLocation(ImmersiveNuclearEngineering.MODID,"fluids/fluid"), 
-				new ResourceLocation(ImmersiveNuclearEngineering.MODID,"fluids/fluid_flow"), INEFluid.createBuilder(color, temperature, density, viscosity, false));
+				new ResourceLocation(ImmersiveNuclearEngineering.MODID,"fluids/fluid_flow"), INEFluid.createBuilder(color, 300, -1000, 1000, true));
 		// TODO Auto-generated constructor stub
 	}
 	
