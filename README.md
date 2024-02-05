@@ -9,6 +9,7 @@ Preview: A mod that add nuclear engineering(i.e Lightly Enriched Uranium Dioxide
 Things to add (in the future):
 * Steam Turbine
 * Molten Salt Reactor (MSR)
-* Electrolyzer
+* Electrolyzer (Crucible Battery ?)
 * Cooling tower (Auxiliary variant ?)
 * Molten salt mixer ?
+* Melting Crucible (from salt to molten salt)
