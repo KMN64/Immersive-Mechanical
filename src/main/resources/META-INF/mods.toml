@@ -55,3 +55,10 @@ mandatory=true
 versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
+
+[[dependencies.${mod_id}]]
+	modId="immersiveengineering"
+	mandatory=true
+	versionRange="[${minecraft_version}-5.1.0-148,)"
+	ordering="BEFORE"
+	side="BOTH"

@@ -1,0 +1,5 @@
+[15:20:54.450][CONSTRUCT][CLIENT][INFO] Starting building internal Registries
+[15:20:57.623][CONSTRUCT][CLIENT][INFO] The following mods have explicit CraftTweaker support:
+'crafttweaker' at version '7.1.2.527'
+'immersiveengineering' at version '1.16.5-5.1.0-148'
+[15:21:00.079][CONSTRUCT][CLIENT][INFO] Completed building internal Registries
