@@ -9,6 +9,8 @@ import org.apache.logging.log4j.Logger;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import net.kmn64.ine.ImmersiveNuclearEngineering;
 import net.kmn64.ine.common.fluids.*;
+import net.kmn64.ine.common.items.INEItemBase;
+import net.kmn64.ine.common.items.INEItemMaterialBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
@@ -37,6 +39,8 @@ public class INEContent {
 		public static INEGaseousFluid tritium;
 		public static INEGaseousFluid helium;
 		public static INEGaseousFluid helium3;
+		public static INEFluid sulfuricacid;
+		public static INEFluid hydrochloricacid;
 		public static INEFluid hydrofluoricacid;
 	}
 	
@@ -45,7 +49,10 @@ public class INEContent {
 	}
 	
 	public static class Items{
-
+		public static INEItemBase salt;
+		public static INEItemMaterialBase depleteduraniumdioxide;
+		public static INEItemMaterialBase lightlyenricheduraniumdioxide;
+		public static INEItemMaterialBase highlyenricheduraniumdioxide;
 	}
 	
 	/** block/item/fluid population */
@@ -55,9 +62,17 @@ public class INEContent {
 		Fluids.tritium = new INEGaseousFluid("tritium",0x64FF70);
 		Fluids.helium = new INEGaseousFluid("helium",0xE3FFFE);
 		Fluids.helium3 = new INEGaseousFluid("helium3",0xE3FFFE);
-		Fluids.hydrofluoricacid=new INEFluid("hydrofluoricacid",0xA8F1E9, 300, 1000, 1000);
+		Fluids.sulfuricacid=new INEFluid("sulfuricacid",0x82802B, 300, 1000, 1000);
+		Fluids.hydrochloricacid=new INEFluid("hydrochloricacid",0xA8F1E9, 300, 1000, 1000);
+		Fluids.hydrofluoricacid=new INEFluid("hydrofluoricacid",0x689B9A, 300, 1300, 1000);
 		
-		//Ready to register multiblock
+		// Regular salt (NaCl)
+		Items.salt = new INEItemBase("salt");
+		Items.depleteduraniumdioxide=new INEItemMaterialBase("depleteduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust"});
+		Items.lightlyenricheduraniumdioxide=new INEItemMaterialBase("lightlyenricheduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust", "rod", "fuelpellet"});
+		Items.highlyenricheduraniumdioxide=new INEItemMaterialBase("highlyenricheduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust", "rod", "fuelpellet"});
+		
+		//Prepare to register multiblock
 		//MultiblockHandler.registerMultiblock(AMultiblock.instance);
 	}
 	

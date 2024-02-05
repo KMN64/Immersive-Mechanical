@@ -1,15 +1,21 @@
 {
 	"itemGroup.ine":"Immersive Nuclear-Engineering",
-	"itemGroup.ine_molten":"Immersive Nuclear-Engineering Molten Salt Compounds",
+	"itemGroup.ine_molten":"IN-E Molten Salt Compounds",
 	"fluid.ine.fluorine":"Fluorine Gas",
 	"fluid.ine.deuterium":"Deuterium",
 	"fluid.ine.tritium":"Tritium",
 	"fluid.ine.helium":"Helium",
 	"fluid.ine.helium3":"Helium-3",
-	"item.ine.fluorine":"Bucket of Fluorine Gas",
-	"item.ine.deuterium":"Bucket of Deuterium",
-	"item.ine.tritium":"Bucket of Tritium",
-	"item.ine.helium":"Bucket of Helium",
-	"item.ine.helium3":"Bucket of Helium-3",
-	"item.ine.hydrofluoricacid":"Bucket of Hydrofluoric Acid"
+	"fluid.ine.sulfuricacid":"Sulfuric Acid",
+	"fluid.ine.hydrochloricacid":"Hydrochloric Acid",
+	"fluid.ine.hydrofluoricacid":"Hydrofluoric Acid",
+	"item.ine.fluorine_bucket":"Bucket of Fluorine Gas",
+	"item.ine.deuterium_bucket":"Bucket of Deuterium",
+	"item.ine.tritium_bucket":"Bucket of Tritium",
+	"item.ine.helium_bucket":"Bucket of Helium",
+	"item.ine.helium3_bucket":"Bucket of Helium-3",
+	"item.ine.sulfuricacid_bucket":"Bucket of Sulfuric Acid",
+	"item.ine.hydrochloricacid_bucket":"Bucket of Hydrochloric Acid",
+	"item.ine.hydrofluoricacid_bucket":"Bucket of Hydrofluoric Acid",
+	"item.ine.salt":"Salt"
 }

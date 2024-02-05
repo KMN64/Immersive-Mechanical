@@ -1,5 +1,7 @@
 package net.kmn64.ine;
 
+import net.kmn64.ine.client.ClientProxy;
+import net.kmn64.ine.common.CommonProxy;
 import net.kmn64.ine.common.INEContent;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -10,6 +12,7 @@ import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -45,21 +48,26 @@ public class ImmersiveNuclearEngineering
 		
 			};
 			
-			public static final ItemGroup CREATIVE_TAB_MOLTEN = new ItemGroup(MODID+"_molten")
-			{
+			
+	@SuppressWarnings("deprecation")
+	public static final ItemGroup CREATIVE_TAB_MOLTEN = new ItemGroup(MODID+"_molten")
+	{
 
-				@Override
-				public ItemStack makeIcon() {
-					// TODO Auto-generated method stub
-					return new ItemStack(INEContent.Fluids.fluorine.getBucket());
-				}
+		@Override
+		public ItemStack makeIcon() {
+			// TODO Auto-generated method stub
+			return new ItemStack(INEContent.Fluids.fluorine.getBucket());
+		}
 				
-				@Override
-				public boolean hasSearchBar() {
-				      return true;
-				}
+		@Override
+		public boolean hasSearchBar() {
+			return true;
+		}
 		
-			}.setBackgroundSuffix("item_search.png");;
+	}.setBackgroundSuffix("item_search.png");
+	
+	public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+
 
     public ImmersiveNuclearEngineering() {
         // Register the setup method for modloading
@@ -78,11 +86,19 @@ public class ImmersiveNuclearEngineering
         
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        
+        proxy.registerContainersAndScreens();
     }
 
     private void setup(final FMLCommonSetupEvent event)
     {
-
+    	proxy.setup();
+    	proxy.preInit();
+    	INEContent.preInit();
+    	proxy.preInitEnd();
+    	INEContent.init();
+    	proxy.init();
+    	proxy.postInit();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
@@ -90,11 +106,12 @@ public class ImmersiveNuclearEngineering
     }
     
     public void serverAboutToStart(FMLServerAboutToStartEvent event){
+    	proxy.serverAboutToStart();
 
 	}
 	
 	public void serverStarting(FMLServerStartingEvent event){
-
+		proxy.serverStarting();
 	}
 	
 	public void registerCommand(RegisterCommandsEvent event){
@@ -102,12 +119,15 @@ public class ImmersiveNuclearEngineering
 	}
 	
 	public void addReloadListeners(AddReloadListenerEvent event){
+		
 	}
 	
 	public void serverStarted(FMLServerStartedEvent event){
+		proxy.serverStarted();
 	}
     
     private void loadComplete(final FMLLoadCompleteEvent event)
     {
+    	proxy.completed();
     }
 }
