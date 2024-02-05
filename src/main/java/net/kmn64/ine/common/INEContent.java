@@ -30,7 +30,7 @@ public class INEContent {
 	public static final List<Fluid> registeredINEFluids = new ArrayList<>();
 	
 	public static class Multiblocks{
-
+		public static Block steeltank;
 	}
 	
 	public static class Fluids{

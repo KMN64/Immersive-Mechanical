@@ -3,6 +3,7 @@ package net.kmn64.ine;
 import net.kmn64.ine.client.ClientProxy;
 import net.kmn64.ine.common.CommonProxy;
 import net.kmn64.ine.common.INEContent;
+import net.kmn64.ine.common.INETileTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
@@ -87,7 +88,9 @@ public class ImmersiveNuclearEngineering
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         
-        proxy.registerContainersAndScreens();
+        INETileTypes.REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
+        
+        proxy.registerContainersAndScreens();//SheetmetalTankTileEntity
     }
 
     private void setup(final FMLCommonSetupEvent event)
