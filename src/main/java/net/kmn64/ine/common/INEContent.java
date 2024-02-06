@@ -11,6 +11,8 @@ import net.kmn64.ine.ImmersiveNuclearEngineering;
 import net.kmn64.ine.common.fluids.*;
 import net.kmn64.ine.common.items.INEItemBase;
 import net.kmn64.ine.common.items.INEItemMaterialBase;
+import net.kmn64.ine.common.multiblocks.blocks.SteelSheetmetalTankBlock;
+import net.kmn64.ine.common.multiblocks.multiblocks.SteelSheetmetalTankMultiblock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
@@ -72,8 +74,11 @@ public class INEContent {
 		Items.lightlyenricheduraniumdioxide=new INEItemMaterialBase("lightlyenricheduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust", "rod", "fuelpellet"});
 		Items.highlyenricheduraniumdioxide=new INEItemMaterialBase("highlyenricheduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust", "rod", "fuelpellet"});
 		
+		Multiblocks.steeltank = new SteelSheetmetalTankBlock();
+		
 		//Prepare to register multiblock
 		//MultiblockHandler.registerMultiblock(AMultiblock.instance);
+		MultiblockHandler.registerMultiblock(SteelSheetmetalTankMultiblock.instance);
 	}
 	
 	public static void preInit(){

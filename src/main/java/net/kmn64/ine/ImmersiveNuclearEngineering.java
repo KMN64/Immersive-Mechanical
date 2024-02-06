@@ -12,6 +12,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
@@ -71,11 +72,12 @@ public class ImmersiveNuclearEngineering
 
 
     public ImmersiveNuclearEngineering() {
+    	IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+    	eventBus.addListener(this::setup);
         // Register the doClientStuff method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
+    	eventBus.addListener(this::doClientStuff);
+    	eventBus.addListener(this::loadComplete);
 		
 		MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
 		MinecraftForge.EVENT_BUS.addListener(this::serverAboutToStart);
@@ -84,13 +86,12 @@ public class ImmersiveNuclearEngineering
 		MinecraftForge.EVENT_BUS.addListener(this::addReloadListeners);
 		
 		INEContent.populate();
+		INETileTypes.REGISTER.register(eventBus);
         
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         
-        INETileTypes.REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
-        
-        proxy.registerContainersAndScreens();//SheetmetalTankTileEntity
+        proxy.registerContainersAndScreens();
     }
 
     private void setup(final FMLCommonSetupEvent event)

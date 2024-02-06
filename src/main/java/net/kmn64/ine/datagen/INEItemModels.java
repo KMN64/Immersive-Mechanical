@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import net.kmn64.ine.ImmersiveNuclearEngineering;
 import net.kmn64.ine.common.INEContent;
+import net.kmn64.ine.common.INEContent.Multiblocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -35,8 +36,16 @@ public class INEItemModels extends ItemModelProvider{
 		// TODO Auto-generated method stub
 		for(Fluid f:INEContent.registeredINEFluids)
 			createBucket(f);
+		
+		steeltankItem();
 	}
 	
+	private void steeltankItem() {
+		// TODO Auto-generated method stub
+		obj(Multiblocks.steeltank, "multiblocks/obj/steel_tank.obj")
+		.texture("texture", modLoc("multiblocks/steel_sheetmetal_tank"));
+	}
+
 	private final Vector3f ZERO = new Vector3f(0, 0, 0);
 	private void doTransform(ModelBuilder<?>.TransformsBuilder transform, Perspective type, Vector3f translation, @Nullable Vector3f rotationAngle, float scale){
 		if(rotationAngle == null){

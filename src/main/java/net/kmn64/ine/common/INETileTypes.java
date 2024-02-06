@@ -16,7 +16,7 @@ public class INETileTypes {
 public static final DeferredRegister<TileEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ImmersiveNuclearEngineering.MODID);
 	
 	// Multiblocks
-	public static final RegistryObject<TileEntityType<SteelSheetmetalTankTileEntity>> STEEL_TANK = register("steel_tank", SteelSheetmetalTankTileEntity::new, INEContent.Multiblocks.steeltank);
+	public static final RegistryObject<TileEntityType<SteelSheetmetalTankTileEntity>> STEEL_TANK = register("steel_tank", SteelSheetmetalTankTileEntity::new,new Block[] {INEContent.Multiblocks.steeltank});
 
 	private static <T extends TileEntity> RegistryObject<TileEntityType<T>> register(String name, Supplier<T> factory, Block... valid){
 		return REGISTER.register(name, () -> new TileEntityType<>(factory, ImmutableSet.copyOf(valid), null));

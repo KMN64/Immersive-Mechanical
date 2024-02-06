@@ -7,10 +7,10 @@ import net.kmn64.ine.common.INETileTypes;
 import net.kmn64.ine.common.multiblocks.tileentities.SteelSheetmetalTankTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
-public class SteelSheetmetalTankBlock extends MetalMultiblockBlock<SteelSheetmetalTankTileEntity> {
+public class SteelSheetmetalTankBlock extends INEMetalMultiblock<SteelSheetmetalTankTileEntity> {
 
 	public SteelSheetmetalTankBlock() {
-		super("steel_tank", INETileTypes.STEEL_TANK);
+		super("steel_tank",()->INETileTypes.STEEL_TANK.get());
 		// TODO Auto-generated constructor stub
 	}
 
