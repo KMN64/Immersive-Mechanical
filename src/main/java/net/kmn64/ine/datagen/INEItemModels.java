@@ -1,10 +1,17 @@
 package net.kmn64.ine.datagen;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import net.kmn64.ine.ImmersiveNuclearEngineering;
 import net.kmn64.ine.common.INEContent;
 import net.kmn64.ine.common.INEContent.Multiblocks;
+import net.kmn64.ine.common.fluids.INEFluid;
+import net.kmn64.ine.common.fluids.INEGaseousFluid;
+import net.kmn64.ine.common.fluids.INEMoltenFluid;
+import net.kmn64.ine.common.fluids.INESolidFluid;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -34,7 +41,13 @@ public class INEItemModels extends ItemModelProvider{
 	@Override
 	protected void registerModels() {
 		// TODO Auto-generated method stub
-		for(Fluid f:INEContent.registeredINEFluids)
+		final ArrayList<Fluid> listfluid = new ArrayList<>();
+		listfluid.addAll(INEFluid.INE_FLUIDS);
+		listfluid.addAll(INEGaseousFluid.INEGASEOUS_FLUIDS);
+		listfluid.addAll(INEMoltenFluid.INEMOLTEN_FLUIDS);
+		listfluid.addAll(INESolidFluid.INESOLID_FLUIDS);
+		
+		for(Fluid f:listfluid)
 			createBucket(f);
 		
 		steeltankItem();
@@ -42,8 +55,12 @@ public class INEItemModels extends ItemModelProvider{
 	
 	private void steeltankItem() {
 		// TODO Auto-generated method stub
-		obj(Multiblocks.steeltank, "multiblocks/obj/steel_tank.obj")
-		.texture("texture", modLoc("multiblocks/steel_sheetmetal_tank"));
+		ItemModelBuilder model = obj(Multiblocks.steeltank, "multiblocks/obj/steel_tank.obj").texture("texture", modLoc("multiblocks/steel_tank"));
+		
+		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
+		List.of(Perspective.values()).forEach((a)->{
+			doTransform(trans,a,new Vector3f(0,-0.25f,0),new Vector3f(20,-45,0),0.1875f);
+		});
 	}
 
 	private final Vector3f ZERO = new Vector3f(0, 0, 0);
