@@ -1,3 +1,4 @@
+c5caa9e47301e3643d1ab155da69df5bb7472234 assets/ine/blockstates/oil_tank.json
 8f77b2f4a2a0f27238327d0a68c946afa0443544 assets/ine/blockstates/steel_tank.json
 f4d3fd3e75c367f796b9e1178e73104d618eebed assets/ine/models/item/deuterium_bucket.json
 5cca9872f7a1ae80dfbda57f0f6a39ebae525f96 assets/ine/models/item/fluorine_bucket.json
@@ -8,5 +9,9 @@ ffa85691d7273a7f5dc1af93dc1486b1f5995aa1 assets/ine/models/item/hydrochloricacid
 28d9758371c4a3ae5b9642ebbad0a1589adccc24 assets/ine/models/item/steel_tank.json
 f823299c571675d40ec2eccea24b2954615e6430 assets/ine/models/item/sulfuricacid_bucket.json
 c379bcc8ae61e599e75e2d9e8663695e3c5174b8 assets/ine/models/item/tritium_bucket.json
+3d27e34d22b5925c32d192861e3d4f400f133be7 assets/ine/models/multiblocks/obj/oiltank.json
+735ec1c2bfa4f91fdf54b1a942f9f66ae21c6c11 assets/ine/models/multiblocks/obj/oiltank_mirrored.json
+3ef80b3fc8679d015ed31bf6ee5edb1973037157 assets/ine/models/multiblocks/obj/oiltank_mirrored_split.json
+709c5f3fce4e9a05b4dc0444e8e0fcd6dd2c77a3 assets/ine/models/multiblocks/obj/oiltank_split.json
 112ec3dd96def6e449dd4bb9568e459f03025487 assets/ine/models/multiblocks/obj/steel_tank.json
 c0b8f0c8d5b739d2953ed9c0f5ecc407ce3b35d8 assets/ine/models/multiblocks/obj/steel_tank_split.json

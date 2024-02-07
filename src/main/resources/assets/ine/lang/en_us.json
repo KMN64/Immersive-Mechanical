@@ -18,5 +18,6 @@
 	"item.ine.hydrochloricacid_bucket":"Bucket of Hydrochloric Acid",
 	"item.ine.hydrofluoricacid_bucket":"Bucket of Hydrofluoric Acid",
 	"item.ine.salt":"Salt",
-	"multiblock.ine.steel_tank":"Steel Sheetmetal Tank"
+	"multiblock.ine.steel_tank":"Steel Sheetmetal Tank",
+	"multiblock.ine.oil_tank":"Oil Tank"
 }
