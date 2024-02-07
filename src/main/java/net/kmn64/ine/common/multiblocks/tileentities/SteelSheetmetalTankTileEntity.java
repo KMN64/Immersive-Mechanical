@@ -47,7 +47,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 public class SteelSheetmetalTankTileEntity extends MultiblockPartTileEntity<SteelSheetmetalTankTileEntity>
 implements IBlockOverlayText, IPlayerInteraction, IComparatorOverride, IBlockBounds
 {
-public FluidTank tank = new FluidTank(512*FluidAttributes.BUCKET_VOLUME);
+public FluidTank tank = new FluidTank(2048*FluidAttributes.BUCKET_VOLUME);
 public final LayeredComparatorOutput comparatorHelper = new LayeredComparatorOutput(
 	tank.getCapacity(),
 	4,

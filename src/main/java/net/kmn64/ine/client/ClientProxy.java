@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.Tree.InnerNode;
 import net.kmn64.ine.ImmersiveNuclearEngineering;
+import net.kmn64.ine.client.utils.MCUtil;
 import net.kmn64.ine.common.CommonProxy;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.entity.Entity;
@@ -61,6 +62,7 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	public void renderTile(TileEntity te, IVertexBuilder iVertexBuilder, MatrixStack transform, IRenderTypeBuffer buffer){
+		
 	}
 	
 	public void handleEntitySound(SoundEvent soundEvent, Entity entity, boolean active, float volume, float pitch){
@@ -76,10 +78,10 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	public World getClientWorld(){
-		return null;
+		return MCUtil.getWorld();
 	}
 	
 	public PlayerEntity getClientPlayer(){
-		return null;
+		return MCUtil.getPlayer();
 	}
 }

@@ -70,26 +70,26 @@ public abstract class ExtendedBlockstateProvider extends BlockStateProvider
 		simpleBlockItem(b, models().cubeAll(name(b), texture));
 	}
 
-	protected void scaffold(Block b, ResourceLocation others, ResourceLocation top)
-	{
-		simpleBlockItem(
-				b,
-				models().withExistingParent(name(b), modLoc("block/ie_scaffolding"))
-						.texture("side", others)
-						.texture("bottom", others)
-						.texture("top", top)
-		);
-	}
+//	protected void scaffold(Block b, ResourceLocation others, ResourceLocation top)
+//	{
+//		simpleBlockItem(
+//				b,
+//				models().withExistingParent(name(b), modLoc("block/ie_scaffolding"))
+//						.texture("side", others)
+//						.texture("bottom", others)
+//						.texture("top", top)
+//		);
+//	}
 
-	protected void slabFor(Block b, ResourceLocation texture)
-	{
-		slabFor(b, texture, texture, texture);
-	}
-
-	protected void slabFor(Block b, ResourceLocation side, ResourceLocation top, ResourceLocation bottom)
-	{
-		slab(IEBlocks.toSlab.get(b), side, top, bottom);
-	}
+//	protected void slabFor(Block b, ResourceLocation texture)
+//	{
+//		slabFor(b, texture, texture, texture);
+//	}
+//
+//	protected void slabFor(Block b, ResourceLocation side, ResourceLocation top, ResourceLocation bottom)
+//	{
+//		slab(IEBlocks.toSlab.get(b), side, top, bottom);
+//	}
 
 	protected void slab(SlabBlock b, ResourceLocation side, ResourceLocation top, ResourceLocation bottom)
 	{
