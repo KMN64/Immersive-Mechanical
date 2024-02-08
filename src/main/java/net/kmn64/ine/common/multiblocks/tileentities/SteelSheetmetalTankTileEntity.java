@@ -22,6 +22,7 @@ import blusunrize.immersiveengineering.common.util.LayeredComparatorOutput;
 import blusunrize.immersiveengineering.common.util.Utils;
 import net.kmn64.ine.common.INETileTypes;
 import net.kmn64.ine.common.multiblocks.multiblocks.SteelSheetmetalTankMultiblock;
+import net.kmn64.ine.config.INEServerConfig;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -47,7 +48,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 public class SteelSheetmetalTankTileEntity extends MultiblockPartTileEntity<SteelSheetmetalTankTileEntity>
 implements IBlockOverlayText, IPlayerInteraction, IComparatorOverride, IBlockBounds
 {
-public FluidTank tank = new FluidTank(2048*FluidAttributes.BUCKET_VOLUME);
+public FluidTank tank = new FluidTank(INEServerConfig.machines.steeltank.steelTank_tankSize.get());
 public final LayeredComparatorOutput comparatorHelper = new LayeredComparatorOutput(
 	tank.getCapacity(),
 	4,

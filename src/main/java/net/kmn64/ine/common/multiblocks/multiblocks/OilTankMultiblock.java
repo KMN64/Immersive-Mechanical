@@ -23,7 +23,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class OilTankMultiblock extends IETemplateMultiblock {
 	public static final OilTankMultiblock instance = new OilTankMultiblock();
 	public OilTankMultiblock() {
-		super(new ResourceLocation(ImmersiveNuclearEngineering.MODID, "multiblocks/oiltank"),
+		super(new ResourceLocation(ImmersiveNuclearEngineering.MODID, "multiblocks/oil_tank"),
 				new BlockPos(2, 0, 3), new BlockPos(2, 1, 5), new BlockPos(5, 4, 6),()-> INEContent.Multiblocks.oiltank.defaultBlockState());
 		// TODO Auto-generated constructor stub
 	}

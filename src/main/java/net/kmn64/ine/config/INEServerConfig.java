@@ -8,6 +8,7 @@ import com.google.common.base.Preconditions;
 import net.kmn64.ine.ImmersiveNuclearEngineering;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -25,6 +26,8 @@ public class INEServerConfig
 		ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 		
 		machines = new Machines(builder);
+		machines.multiblock = new Machines.Multiblock(builder);
+		machines.steeltank = new Machines.SteelTank(builder);
 		
 		all = builder.build();
 	}
@@ -51,6 +54,7 @@ public class INEServerConfig
 	
 	public static class Machines {
 		public static Multiblock multiblock;
+		public static SteelTank steeltank;
 		
 		Machines(ForgeConfigSpec.Builder builder)
 		{
@@ -62,6 +66,17 @@ public class INEServerConfig
 			Multiblock(ForgeConfigSpec.Builder builder)
 			{
 				builder.push("multiblock");
+				builder.pop();
+			}
+		}
+		public static class SteelTank {
+			public final ConfigValue<Integer> steelTank_tankSize;
+			public final ConfigValue<Integer> steelTank_transferSpeed;
+			SteelTank(ForgeConfigSpec.Builder builder)
+			{
+				builder.push("steeltank");
+				steelTank_tankSize = builder.comment("Steel Tank Size in mB [Default=2048000]").define("steelTank_tankSize", 2048000);
+				steelTank_transferSpeed = builder.comment("\"How fast can the Steel Tank push fluids out, in mB, when powered by Redstone [Default=1000]").define("steelTank_transferSpeed", 1000);
 				builder.pop();
 			}
 		}

@@ -1,0 +1,6 @@
+{
+  "oiltank": {
+    "type": "multiblock",
+    "name": "ine:multiblocks/oil_tank"
+  }
+}

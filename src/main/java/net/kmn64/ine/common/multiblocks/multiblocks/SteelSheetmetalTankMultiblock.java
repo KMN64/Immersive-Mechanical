@@ -23,7 +23,7 @@ import net.minecraftforge.api.distmarker.Dist;
 public class SteelSheetmetalTankMultiblock extends IETemplateMultiblock {
 	public static SteelSheetmetalTankMultiblock instance = new SteelSheetmetalTankMultiblock();
 	public SteelSheetmetalTankMultiblock() {
-		super(new ResourceLocation(ImmersiveNuclearEngineering.MODID, "multiblocks/steel_sheetmetal_tank"),
+		super(new ResourceLocation(ImmersiveNuclearEngineering.MODID, "multiblocks/steel_tank"),
 				new BlockPos(1, 0, 1), new BlockPos(1, 1, 2), new BlockPos(3, 5, 3), ()->INEContent.Multiblocks.steeltank.defaultBlockState());
 		// TODO Auto-generated constructor stub
 	}
