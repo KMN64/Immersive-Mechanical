@@ -3,7 +3,7 @@
 
 mtllib oiltank_mirrored.mtl
 usemtl oiltank_mirrored
-o oiltank_mirrored
+o cube
 v -1.000000 -0.000000 2.000000
 v -2.000000 0.999999 3.000000
 v 3.000000 1.000000 3.000000

@@ -12,6 +12,7 @@ import net.kmn64.ine.common.fluids.INEFluid;
 import net.kmn64.ine.common.fluids.INEGaseousFluid;
 import net.kmn64.ine.common.fluids.INEMoltenFluid;
 import net.kmn64.ine.common.fluids.INESolidFluid;
+import net.kmn64.ine.common.items.INEItemMaterialBase;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -41,6 +42,10 @@ public class INEItemModels extends ItemModelProvider{
 	@Override
 	protected void registerModels() {
 		// TODO Auto-generated method stub
+		INEItemMaterialBase.arrlist.forEach((a)->{
+			genericMaterialItem(a);
+		});
+		
 		final ArrayList<Fluid> listfluid = new ArrayList<>();
 		listfluid.addAll(INEFluid.INE_FLUIDS);
 		listfluid.addAll(INEGaseousFluid.INEGASEOUS_FLUIDS);
@@ -51,8 +56,25 @@ public class INEItemModels extends ItemModelProvider{
 			createBucket(f);
 		
 		steeltankItem();
+		oiltankItem();
 	}
 	
+	private void oiltankItem() {
+		// TODO Auto-generated method stub
+		ItemModelBuilder model = obj(Multiblocks.oiltank, "multiblocks/obj/oiltank.obj")
+				.texture("textures", modLoc("multiblocks/oiltank"));
+		
+		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
+		doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), 0.0625F);
+		doTransform(trans, Perspective.FIRSTPERSON_RIGHT, new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), 0.0625F);
+		doTransform(trans, Perspective.THIRDPERSON_LEFT, new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), 0.0625F);
+		doTransform(trans, Perspective.THIRDPERSON_RIGHT, new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), 0.0625F);
+		doTransform(trans, Perspective.HEAD, new Vector3f(0, 7.6F, 0), new Vector3f(0, 180, 0), 0.15625F);
+		doTransform(trans, Perspective.GUI, new Vector3f(0, -2, 0), new Vector3f(30, 45, 0), 0.125F);
+		doTransform(trans, Perspective.GROUND, new Vector3f(0, 1, 0), null, 0.0625F);
+		doTransform(trans, Perspective.FIXED, new Vector3f(0, -1, 0), new Vector3f(0, 180, 0), 0.0625F);
+	}
+
 	private void steeltankItem() {
 		// TODO Auto-generated method stub
 		ItemModelBuilder model = obj(Multiblocks.steeltank, "multiblocks/obj/steel_tank.obj").texture("texture", modLoc("multiblocks/steel_tank"));
@@ -85,14 +107,28 @@ public class INEItemModels extends ItemModelProvider{
 	private void genericItem(Item item){
 		if(item == null){
 			StackTraceElement where = new NullPointerException().getStackTrace()[1];
-			//IPDataGenerator.log.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
+			INEDataGenerator.LOGGER.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
 			return;
 		}
 		String name = name(item);
 		
 		getBuilder(name)
 			.parent(getExistingFile(mcLoc("item/generated")))
-			.texture("layer0", modLoc("item/"+name));
+			.texture("layer0", modLoc("items/"+name));
+	}
+	
+	private void genericMaterialItem(Item item){
+		if(item == null){
+			StackTraceElement where = new NullPointerException().getStackTrace()[1];
+			INEDataGenerator.LOGGER.warn("Skipping null item. ( {} -> {} )", where.getFileName(), where.getLineNumber());
+			return;
+		}
+		String name = name(item);
+		String[] split = name.split("_");
+		
+		getBuilder(name)
+			.parent(getExistingFile(mcLoc("item/generated")))
+			.texture("layer0", modLoc("items/materials/"+split[split.length-1]));
 	}
 	
 	private void createBucket(Fluid f){
