@@ -18,11 +18,7 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-@OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(value = Dist.CLIENT, modid = ImmersiveNuclearEngineering.MODID, bus = Bus.MOD)
 public class SteelSheetmetalTankRenderer extends TileEntityRenderer<SteelSheetmetalTankTileEntity>
 {
 	  public SteelSheetmetalTankRenderer(TileEntityRendererDispatcher rendererDispatcherIn) { super(rendererDispatcherIn); }
@@ -52,7 +48,7 @@ public class SteelSheetmetalTankRenderer extends TileEntityRenderer<SteelSheetme
 	      matrixStack.translate(xx, 0.0D, zz);
 	      
 	      Matrix4f mat = matrixStack.last().pose();
-	      IVertexBuilder builder = bufferIn.getBuffer(IERenderTypes.TRANSLUCENT_POSITION_COLOR);
+	      IVertexBuilder builder = bufferIn.getBuffer(INERenderTypes.TRANSLUCENT_POSITION_COLOR);
 	      builder.vertex(mat, -4.0F, -4.0F, 0.0F).color(34, 34, 34, 255).endVertex();
 	      builder.vertex(mat, -4.0F, 20.0F, 0.0F).color(34, 34, 34, 255).endVertex();
 	      builder.vertex(mat, 20.0F, 20.0F, 0.0F).color(34, 34, 34, 255).endVertex();

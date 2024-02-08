@@ -11,8 +11,11 @@ import blusunrize.lib.manual.ManualEntry;
 import blusunrize.lib.manual.ManualInstance;
 import blusunrize.lib.manual.Tree.InnerNode;
 import net.kmn64.ine.ImmersiveNuclearEngineering;
+import net.kmn64.ine.client.render.OilTankRenderer;
+import net.kmn64.ine.client.render.SteelSheetmetalTankRenderer;
 import net.kmn64.ine.client.utils.MCUtil;
 import net.kmn64.ine.common.CommonProxy;
+import net.kmn64.ine.common.INETileTypes;
 import net.kmn64.ine.common.items.INEItemMaterialBase;
 import net.kmn64.ine.common.multiblocks.multiblocks.SteelSheetmetalTankMultiblock;
 import net.kmn64.ine.config.INEServerConfig;
@@ -39,6 +42,8 @@ import net.minecraftforge.client.model.data.EmptyModelData;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
@@ -51,6 +56,7 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	public void preInit(){
+		
 	}
 	
 	public void preInitEnd(){
@@ -58,7 +64,8 @@ public class ClientProxy extends CommonProxy {
 	
 	
 	public void init(){
-		
+		ClientRegistry.bindTileEntityRenderer(INETileTypes.STEEL_TANK.get(), SteelSheetmetalTankRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(INETileTypes.OIL_TANK.get(), OilTankRenderer::new);
 	}
 	
 	

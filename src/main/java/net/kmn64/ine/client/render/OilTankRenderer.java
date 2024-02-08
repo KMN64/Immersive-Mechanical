@@ -22,8 +22,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
-@OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(value = Dist.CLIENT, modid = ImmersiveNuclearEngineering.MODID, bus = Bus.MOD)
 public class OilTankRenderer extends TileEntityRenderer<OilTankTileEntity>{
 
 	public OilTankRenderer(TileEntityRendererDispatcher p_i226006_1_) {

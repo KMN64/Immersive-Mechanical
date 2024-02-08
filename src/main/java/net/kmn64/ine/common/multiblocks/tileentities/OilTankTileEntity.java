@@ -265,16 +265,20 @@ public class OilTankTileEntity extends MultiblockPartTileEntity<OilTankTileEntit
 	@Override
 	protected boolean canFillTankFrom(int paramInt, Direction paramDirection, FluidStack paramFluidStack) {
 		// TODO Auto-generated method stub
-		return portConfig.keySet().stream().anyMatch((a)->{
-			return a.posInMultiblock==posInMultiblock && portConfig.get(a)==PortState.INPUT;
+		return portConfig.keySet().stream().filter((a)->{
+			return a.posInMultiblock==posInMultiblock;
+		}).anyMatch((a)->{
+			return portConfig.get(a)==PortState.INPUT;
 		});
 	}
 
 	@Override
 	protected boolean canDrainTankFrom(int paramInt, Direction paramDirection) {
 		// TODO Auto-generated method stub
-		return portConfig.keySet().stream().anyMatch((a)->{
-			return a.posInMultiblock==posInMultiblock && portConfig.get(a)==PortState.OUTPUT;
+		return portConfig.keySet().stream().filter((a)->{
+			return a.posInMultiblock==posInMultiblock;
+		}).anyMatch((a)->{
+			return portConfig.get(a)==PortState.OUTPUT;
 		});
 	}
 	
@@ -313,7 +317,7 @@ public class OilTankTileEntity extends MultiblockPartTileEntity<OilTankTileEntit
 					OilTankTileEntity master = master();
 					if(master != null){
 						PortState portState = master.getPortStateFor(port);
-						master.portConfig.put(port, portState.next());
+						master.portConfig.replace(port,portState, portState.next());
 						this.updateMasterBlock(null, true);
 						return true;
 					}
