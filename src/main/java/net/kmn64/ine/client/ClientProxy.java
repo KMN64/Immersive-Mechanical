@@ -97,7 +97,7 @@ public class ClientProxy extends CommonProxy {
 		ADV_TANK_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"adv_tank"), 100);
 		
 		steeltank(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"steel_tank"),0);
-		oiltank(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"oil_tank"),0);
+		oiltank(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"oil_tank"),1);
 	}
 	
 	private void oiltank(ResourceLocation resourceLocation, int i) {
