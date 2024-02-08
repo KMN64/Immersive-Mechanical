@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "particle": "ine:multiblocks/oiltank"
+    "particle": "ine:multiblocks/oil_tank"
   },
   "loader": "immersiveengineering:basic_split",
   "dynamic": false,
-  "base_model": "ine:multiblocks/obj/oiltank",
+  "base_model": "ine:multiblocks/obj/oil_tank_mirrored",
   "split_parts": [
     [
       -2,

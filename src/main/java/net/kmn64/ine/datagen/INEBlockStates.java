@@ -55,7 +55,7 @@ public class INEBlockStates extends ExtendedBlockstateProvider{
 	protected void registerStatesAndModels() {
 		// TODO Auto-generated method stub
 		createMultiblock(INEContent.Multiblocks.steeltank, split(obj("multiblocks/obj/steel_tank.obj"),SteelSheetmetalTankMultiblock.instance));
-		createMultiblock(INEContent.Multiblocks.oiltank, split(obj("multiblocks/obj/oiltank.obj"),OilTankMultiblock.instance),split(obj("multiblocks/obj/oiltank_mirrored.obj"),OilTankMultiblock.instance));
+		createMultiblock(INEContent.Multiblocks.oiltank, split(obj("multiblocks/obj/oil_tank.obj"),OilTankMultiblock.instance),split(obj("multiblocks/obj/oil_tank_mirrored.obj"),OilTankMultiblock.instance));
 	}
 	
 	private ModelFile cubeThree(String name, ResourceLocation def, ResourceLocation front)

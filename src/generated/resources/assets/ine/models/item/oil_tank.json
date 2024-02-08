@@ -93,9 +93,9 @@
     }
   },
   "textures": {
-    "textures": "ine:multiblocks/oiltank"
+    "textures": "ine:multiblocks/oil_tank"
   },
   "loader": "forge:obj",
-  "model": "ine:models/multiblocks/obj/oiltank.obj",
+  "model": "ine:models/multiblocks/obj/oil_tank.obj",
   "flip-v": true
 }

@@ -61,8 +61,8 @@ public class INEItemModels extends ItemModelProvider{
 	
 	private void oiltankItem() {
 		// TODO Auto-generated method stub
-		ItemModelBuilder model = obj(Multiblocks.oiltank, "multiblocks/obj/oiltank.obj")
-				.texture("textures", modLoc("multiblocks/oiltank"));
+		ItemModelBuilder model = obj(Multiblocks.oiltank, "multiblocks/obj/oil_tank.obj")
+				.texture("textures", modLoc("multiblocks/oil_tank"));
 		
 		ModelBuilder<?>.TransformsBuilder trans = model.transforms();
 		doTransform(trans, Perspective.FIRSTPERSON_LEFT, new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), 0.0625F);

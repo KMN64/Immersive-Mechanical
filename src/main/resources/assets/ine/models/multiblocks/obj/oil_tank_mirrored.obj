@@ -1,9 +1,9 @@
 # Model by LeastReality.
 # Optimized for in-game by TwistedGate
 
-mtllib oiltank_mirrored.mtl
-usemtl oiltank_mirrored
-o cube
+mtllib oil_tank_mirrored.mtl
+usemtl oil_tank_mirrored
+o oiltank_mirrored
 v -1.000000 -0.000000 2.000000
 v -2.000000 0.999999 3.000000
 v 3.000000 1.000000 3.000000
@@ -373,7 +373,6 @@ vn 1.0000 0.0000 0.0000
 vn 0.0000 0.0000 -1.0000
 vn -1.0000 -0.0000 0.0000
 vn -0.0000 1.0000 -0.0000
-usemtl None
 s off
 f 1/1/1 4/2/1 3/3/1 2/4/1
 f 4/5/2 6/6/2 5/7/2 3/8/2
