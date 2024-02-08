@@ -73,14 +73,13 @@ public class INEContent {
 		
 		// Regular salt (NaCl)
 		Items.salt = new INEItemBase("salt");
-		Items.depleteduraniumdioxide=new INEItemMaterialBase("depleteduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust"});
-		Items.lightlyenricheduraniumdioxide=new INEItemMaterialBase("lightlyenricheduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust", "rod", "fuelpellet"});
-		Items.highlyenricheduraniumdioxide=new INEItemMaterialBase("highlyenricheduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust", "rod", "fuelpellet"});
+		Items.depleteduraniumdioxide=new INEItemMaterialBase("depleteduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust"},0x363636);
+		Items.lightlyenricheduraniumdioxide=new INEItemMaterialBase("lightlyenricheduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust", "rod", "fuelpellet"},0x55614c);
+		Items.highlyenricheduraniumdioxide=new INEItemMaterialBase("highlyenricheduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust", "rod", "fuelpellet"},0x667c59);
 		
 		Multiblocks.steeltank = new SteelSheetmetalTankBlock();
 		Multiblocks.oiltank = new OilTankBlock();
 		
-		//Prepare to register multiblock
 		//MultiblockHandler.registerMultiblock(AMultiblock.instance);
 		MultiblockHandler.registerMultiblock(SteelSheetmetalTankMultiblock.instance);
 		MultiblockHandler.registerMultiblock(OilTankMultiblock.instance);
