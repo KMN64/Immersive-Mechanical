@@ -25,19 +25,6 @@ public class BlockRenderLayers {
 	public static void clientSetup(FMLClientSetupEvent event){
 		RenderTypeLookup.setRenderLayer(INEContent.Multiblocks.steeltank, RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(INEContent.Multiblocks.oiltank, RenderType.cutoutMipped());
-		
-		final ArrayList<Fluid> listfluid = new ArrayList<>();
-		listfluid.addAll(INEFluid.INE_FLUIDS);
-		listfluid.addAll(INEGaseousFluid.INEGASEOUS_FLUIDS);
-		listfluid.addAll(INEMoltenFluid.INEMOLTEN_FLUIDS);
-		listfluid.addAll(INESolidFluid.INESOLID_FLUIDS);
-		for(Fluid f:listfluid){
-			setRenderLayer(f, RenderType.translucent());
-		}
-		
-		for(Fluid f:INEContent.registeredINEFluids){
-			setRenderLayer(f, RenderType.translucent());
-		}
 	}
 	
 	private static void setRenderLayer(Fluid entry, RenderType types){

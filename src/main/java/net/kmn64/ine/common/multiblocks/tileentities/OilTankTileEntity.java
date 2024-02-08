@@ -30,6 +30,7 @@ import net.kmn64.ine.common.utils.FluidHelper;
 import net.kmn64.ine.common.utils.LayeredComparatorOutput;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
@@ -123,6 +124,26 @@ public class OilTankTileEntity extends MultiblockPartTileEntity<OilTankTileEntit
 			}
 		}
 		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public void readCustomNBT(CompoundNBT nbt, boolean descPacket){
+		super.readCustomNBT(nbt, descPacket);
+		this.tank.readFromNBT(nbt.getCompound("tank"));
+		
+		for(Port port:Port.DYNAMIC_PORTS){
+			portConfig.put(port, PortState.values()[nbt.getInt(port.getSerializedName())]);
+		}
+	}
+	
+	@Override
+	public void writeCustomNBT(CompoundNBT nbt, boolean descPacket){
+		super.writeCustomNBT(nbt, descPacket);
+		nbt.put("tank", this.tank.writeToNBT(new CompoundNBT()));
+		
+		for(Port port:Port.DYNAMIC_PORTS){
+			nbt.putInt(port.getSerializedName(), getPortStateFor(port).ordinal());
+		}
 	}
 
 	@Override
