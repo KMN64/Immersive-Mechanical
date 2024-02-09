@@ -96,6 +96,11 @@ public class ClientProxy extends CommonProxy {
 	/** Immersive Nuclear-Engineering's Manual Category */
 	private static InnerNode<ResourceLocation, ManualEntry> ADV_TANK_CATEGORY;
 	private static InnerNode<ResourceLocation, ManualEntry> GEN_I_CATEGORY;
+	private static InnerNode<ResourceLocation, ManualEntry> GEN_II_CATEGORY;
+	private static InnerNode<ResourceLocation, ManualEntry> GEN_III_CATEGORY;
+	private static InnerNode<ResourceLocation, ManualEntry> GEN_advIII_CATEGORY;
+	private static InnerNode<ResourceLocation, ManualEntry> GEN_IV_CATEGORY;
+	private static InnerNode<ResourceLocation, ManualEntry> MSR_CATEGORY;
 	private static InnerNode<ResourceLocation, ManualEntry> INE_CATEGORY;
 	
 	public void renderTile(TileEntity te, IVertexBuilder iVertexBuilder, MatrixStack transform, IRenderTypeBuffer buffer){
@@ -113,12 +118,23 @@ public class ClientProxy extends CommonProxy {
 		
 		ADV_TANK_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"adv_tank"), 100);
 		GEN_I_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"gen_1_reactor"));
+		GEN_II_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"gen_2_reactor"));
+		GEN_III_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"gen_3_reactor"));
+		GEN_advIII_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"gen_adv3_reactor"));
+		GEN_IV_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"gen_4_reactor"));
 		INE_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"ine_items"));
 		
+		MSR_CATEGORY = GEN_IV_CATEGORY.getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"msr_reactor"));
+		
+		multiblockadvtankcategory();
+	}
+	
+	private void multiblockadvtankcategory() {
+		// TODO Auto-generated method stub
 		steeltank(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"steel_tank"),0);
 		oiltank(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"oil_tank"),1);
 	}
-	
+
 	private void oiltank(ResourceLocation resourceLocation, int i) {
 		// TODO Auto-generated method stub
 		ManualInstance man = ManualHelper.getManual();

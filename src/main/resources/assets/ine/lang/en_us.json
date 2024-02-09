@@ -22,6 +22,10 @@
 	"multiblock.ine.oil_tank":"Oil Tank",
 	"manual.ine.adv_tank": "More Advance Tank",
 	"manual.ine.gen_1_reactor": "Generation I Reactor",
+	"manual.ine.gen_2_reactor": "Generation II Reactor",
+	"manual.ine.gen_3_reactor": "Generation III Reactor",
+	"manual.ine.gen_adv3_reactor": "Generation III+ Reactor",
+	"manual.ine.gen_4_reactor": "Generation IV Reactor",
 	"manual.ine.ine_items": "Immersive Nuclear-Engineering Items",
 	"desc.immersivepetroleum.info.oiltank.input": "Input",
 	"desc.immersivepetroleum.info.oiltank.output": "Output"

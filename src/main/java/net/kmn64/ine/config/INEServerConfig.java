@@ -76,7 +76,7 @@ public class INEServerConfig
 			{
 				builder.push("steeltank");
 				steelTank_tankSize = builder.comment("Steel Tank Size in mB [Default=2048000]").define("steelTank_tankSize", 2048000);
-				steelTank_transferSpeed = builder.comment("\"How fast can the Steel Tank push fluids out, in mB, when powered by Redstone [Default=1000]").define("steelTank_transferSpeed", 1000);
+				steelTank_transferSpeed = builder.comment("How fast can the Steel Tank push fluids out, in mB, when powered by Redstone [Default=1000]").define("steelTank_transferSpeed", 1000);
 				builder.pop();
 			}
 		}

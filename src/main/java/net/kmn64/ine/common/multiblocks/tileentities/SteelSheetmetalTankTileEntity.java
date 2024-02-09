@@ -105,7 +105,7 @@ if(!isRSDisabled())
 	for(CapabilityReference<IFluidHandler> outputRef : fluidNeighbors)
 		if(tank.getFluidAmount() > 0)
 		{
-			int outSize = Math.min(FluidAttributes.BUCKET_VOLUME, tank.getFluidAmount());
+			int outSize = /*Math.min(FluidAttributes.BUCKET_VOLUME, tank.getFluidAmount())*/INEServerConfig.machines.steeltank.steelTank_transferSpeed.get();
 			FluidStack out = Utils.copyFluidStackWithAmount(tank.getFluid(), outSize, false);
 			IFluidHandler output = outputRef.getNullable();
 			if(output!=null)

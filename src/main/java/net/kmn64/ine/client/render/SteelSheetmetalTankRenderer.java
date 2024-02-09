@@ -56,7 +56,7 @@ public class SteelSheetmetalTankRenderer extends TileEntityRenderer<SteelSheetme
 	      
 	      if (!fs.isEmpty()) {
 	        
-	        float h = fs.getAmount() / tile.tank.getCapacity();
+	        float h = fs.getAmount() / (float)tile.tank.getCapacity();
 	        matrixStack.translate(0.0D, 0.0D, 0.004000000189989805D);
 	        GuiHelper.drawRepeatedFluidSprite(bufferIn.getBuffer(RenderType.solid()), matrixStack, fs, 0.0F, 0.0F + (1.0F - h) * 16.0F, 16.0F, h * 16.0F);
 	      } 
