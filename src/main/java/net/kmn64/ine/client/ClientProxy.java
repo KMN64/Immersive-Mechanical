@@ -94,8 +94,9 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	/** Immersive Nuclear-Engineering's Manual Category */
-	private static InnerNode<ResourceLocation, ManualEntry> INE_CATEGORY;
 	private static InnerNode<ResourceLocation, ManualEntry> ADV_TANK_CATEGORY;
+	private static InnerNode<ResourceLocation, ManualEntry> GEN_I_CATEGORY;
+	private static InnerNode<ResourceLocation, ManualEntry> INE_CATEGORY;
 	
 	public void renderTile(TileEntity te, IVertexBuilder iVertexBuilder, MatrixStack transform, IRenderTypeBuffer buffer){
 		
@@ -111,6 +112,8 @@ public class ClientProxy extends CommonProxy {
 		ManualInstance man = ManualHelper.getManual();
 		
 		ADV_TANK_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"adv_tank"), 100);
+		GEN_I_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"gen_1_reactor"));
+		INE_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"ine_items"));
 		
 		steeltank(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"steel_tank"),0);
 		oiltank(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"oil_tank"),1);

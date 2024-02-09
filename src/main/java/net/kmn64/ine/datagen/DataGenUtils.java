@@ -55,7 +55,6 @@ public class DataGenUtils {
 			else
 				materialEnd = fullMtl.length();
 			String material = fullMtl.substring(materialStart, materialEnd);
-			INEDataGenerator.LOGGER.info("Material: "+material);
 			return findFirstOccurrenceGroup(MAP_KD, material);
 		} catch(IOException e)
 		{

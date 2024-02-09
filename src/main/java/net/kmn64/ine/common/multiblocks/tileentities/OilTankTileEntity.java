@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 
@@ -145,11 +146,24 @@ public class OilTankTileEntity extends MultiblockPartTileEntity<OilTankTileEntit
 			nbt.putInt(port.getSerializedName(), getPortStateFor(port).ordinal());
 		}
 	}
+	
+	public boolean isLadder(){
+		int x = posInMultiblock.getX();
+		int z = posInMultiblock.getZ();
+		
+		return x == 3 && z == 0;
+	}
+	
+	private boolean isPipeConnected(BlockPos posInMultiblock,PortState portstate)
+	{
+		return this.portConfig.keySet().parallelStream().anyMatch((port)->{
+			return port.posInMultiblock.equals(posInMultiblock) && (portstate==null) ? true : portConfig.get(port)==portstate;
+		});
+	}
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
-		if(isDummy()){
+		if(isDummy()||level.isClientSide){
 			return;
 		}
 		
@@ -273,7 +287,7 @@ public class OilTankTileEntity extends MultiblockPartTileEntity<OilTankTileEntit
 	protected IFluidTank[] getAccessibleFluidTanks(Direction paramDirection) {
 		// TODO Auto-generated method stub
 		OilTankTileEntity master = master();
-		if(master!=null&&portConfig.keySet().stream().anyMatch((a)->{return posInMultiblock==a.posInMultiblock;}))
+		if(master!=null&&isPipeConnected(posInMultiblock,null))
 			return new FluidTank[]{master.tank};
 		return new FluidTank[0];
 	}
@@ -286,21 +300,13 @@ public class OilTankTileEntity extends MultiblockPartTileEntity<OilTankTileEntit
 	@Override
 	protected boolean canFillTankFrom(int paramInt, Direction paramDirection, FluidStack paramFluidStack) {
 		// TODO Auto-generated method stub
-		return portConfig.keySet().stream().filter((a)->{
-			return a.posInMultiblock==posInMultiblock;
-		}).anyMatch((a)->{
-			return portConfig.get(a)==PortState.INPUT;
-		});
+		return isPipeConnected(posInMultiblock,PortState.INPUT);
 	}
 
 	@Override
 	protected boolean canDrainTankFrom(int paramInt, Direction paramDirection) {
 		// TODO Auto-generated method stub
-		return portConfig.keySet().stream().filter((a)->{
-			return a.posInMultiblock==posInMultiblock;
-		}).anyMatch((a)->{
-			return portConfig.get(a)==PortState.OUTPUT;
-		});
+		return isPipeConnected(posInMultiblock,PortState.OUTPUT);
 	}
 	
 	private final LayeredComparatorOutput comparatorHelper = new LayeredComparatorOutput(

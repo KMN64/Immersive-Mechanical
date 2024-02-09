@@ -20,5 +20,9 @@
 	"item.ine.salt":"Salt",
 	"multiblock.ine.steel_tank":"Steel Sheetmetal Tank",
 	"multiblock.ine.oil_tank":"Oil Tank",
-	"manual.ine.adv_tank": "More Advance Tank"
+	"manual.ine.adv_tank": "More Advance Tank",
+	"manual.ine.gen_1_reactor": "Generation I Reactor",
+	"manual.ine.ine_items": "Immersive Nuclear-Engineering Items",
+	"desc.immersivepetroleum.info.oiltank.input": "Input",
+	"desc.immersivepetroleum.info.oiltank.output": "Output"
 }
