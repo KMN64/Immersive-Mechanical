@@ -54,7 +54,7 @@ public class INEBlockStates extends ExtendedBlockstateProvider{
 	}
 	@Override
 	protected void registerStatesAndModels() {
-		createMultiblock(INEContent.Multiblocks.distiller, split(obj("multiblocks/obj/distiller.obj"),OilTankMultiblock.instance),split(obj("multiblocks/obj/distiller_mirrored.obj"),DistillerMultiblock.instance));
+		createMultiblock(INEContent.Multiblocks.distiller, split(obj("multiblocks/obj/distiller.obj"),DistillerMultiblock.instance),split(obj("multiblocks/obj/distiller_mirrored.obj"),DistillerMultiblock.instance));
 		createMultiblock(INEContent.Multiblocks.steeltank, split(obj("multiblocks/obj/steel_tank.obj"),SteelSheetmetalTankMultiblock.instance));
 		createMultiblock(INEContent.Multiblocks.oiltank, split(obj("multiblocks/obj/oil_tank.obj"),OilTankMultiblock.instance),split(obj("multiblocks/obj/oil_tank_mirrored.obj"),OilTankMultiblock.instance));
 	}
