@@ -1,0 +1,5 @@
+Distiller
+Clearer than water
+<&distiller>
+The Distiller is a multiblock machine that turns Water in to Distilled Water and Salt.<br>The structure is built as shown above and formed by using the Engineer's Hammer on the central Sheetmetal Iron.
+Applying a redstone signal to the control panel at the front will halt the machine's progress, this behavior can be inverted by use of the Engineer's Hammer.<br>Water can be input into the Distiller via a hatch on the right that is marked with a blue dot. The hatch with the orange dot on the left is the fluid output and the other hatch on the back serves as a item output.<br>It needs energy to produce Distilled Water and Salt.<br>One bucket of Water produces 500 mB of Distilled Water.

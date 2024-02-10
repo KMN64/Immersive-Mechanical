@@ -1,3 +1,4 @@
+68b7edc641d32fcccea4eef3d5c0fdcc67c997bf assets/ine/blockstates/distiller.json
 9f5a11096bd27aa6efbf5e7da81334e3f5b204bd assets/ine/blockstates/oil_tank.json
 8f77b2f4a2a0f27238327d0a68c946afa0443544 assets/ine/blockstates/steel_tank.json
 97ae4b8ec7e5b911f06e45e8df036e9700ac83bf assets/ine/models/item/depleteduraniumdioxide_dust.json
@@ -26,6 +27,15 @@ e3aa5c3a2c32701997505907c802d920b8906b7e assets/ine/models/item/oil_tank.json
 28d9758371c4a3ae5b9642ebbad0a1589adccc24 assets/ine/models/item/steel_tank.json
 f823299c571675d40ec2eccea24b2954615e6430 assets/ine/models/item/sulfuricacid_bucket.json
 c379bcc8ae61e599e75e2d9e8663695e3c5174b8 assets/ine/models/item/tritium_bucket.json
+97ae4b8ec7e5b911f06e45e8df036e9700ac83bf assets/ine/models/item/tungsten_dust.json
+7fd8664cf43d794f1345b1722bde95c9e63d3bd9 assets/ine/models/item/tungsten_ingot.json
+f553a80ebdc8a183ba09b2276517e46cd9120a87 assets/ine/models/item/tungsten_nugget.json
+cfba9772e3f420fd1e0f691094f343c77dc6cb09 assets/ine/models/item/tungsten_plate.json
+1197e9a2a3451e72a3fced8c9c391a32a0aba68d assets/ine/models/item/tungsten_rod.json
+e72db82451f91e43f3113e8c8b3d9369b1950e0a assets/ine/models/multiblocks/obj/distiller.json
+6f599b6d709aad99870fba3de3fc9778c9b6b127 assets/ine/models/multiblocks/obj/distiller_mirrored.json
+a7d2f0fb4bb4ea0f85bfcfe1b210e134c99132f5 assets/ine/models/multiblocks/obj/distiller_mirrored_split.json
+c0fb96faeb8da533d6352720df48b3831aac9900 assets/ine/models/multiblocks/obj/distiller_split.json
 3dc9048512642502b5b2d108f133ab5bb7377056 assets/ine/models/multiblocks/obj/oil_tank.json
 a1d30ef1ec445e13afd9ed7a568169839d2680af assets/ine/models/multiblocks/obj/oil_tank_mirrored.json
 b4a8861c8002201e597815d254c6890b6297b738 assets/ine/models/multiblocks/obj/oil_tank_mirrored_split.json

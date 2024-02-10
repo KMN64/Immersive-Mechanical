@@ -1,0 +1,6 @@
+{
+  "distiller": {
+    "type": "multiblock",
+    "name": "ine:multiblocks/distiller"
+  }
+}

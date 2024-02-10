@@ -4,6 +4,7 @@ import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableSet;
 
 import net.kmn64.ine.ImmersiveNuclearEngineering;
+import net.kmn64.ine.common.multiblocks.tileentities.DistillerTileEntity;
 import net.kmn64.ine.common.multiblocks.tileentities.OilTankTileEntity;
 import net.kmn64.ine.common.multiblocks.tileentities.SteelSheetmetalTankTileEntity;
 import net.minecraft.block.Block;
@@ -19,6 +20,7 @@ public static final DeferredRegister<TileEntityType<?>> REGISTER = DeferredRegis
 	// Multiblocks
 	public static final RegistryObject<TileEntityType<SteelSheetmetalTankTileEntity>> STEEL_TANK = register("steel_tank", SteelSheetmetalTankTileEntity::new,new Block[] {INEContent.Multiblocks.steeltank});
 	public static final RegistryObject<TileEntityType<OilTankTileEntity>> OIL_TANK = register("oil_tank", OilTankTileEntity::new,new Block[] {INEContent.Multiblocks.oiltank});
+	public static final RegistryObject<TileEntityType<DistillerTileEntity>> DISTILLER = register("distiller", DistillerTileEntity::new,new Block[] {INEContent.Multiblocks.distiller});
 	
 	private static <T extends TileEntity> RegistryObject<TileEntityType<T>> register(String name, Supplier<T> factory, Block... valid){
 		return REGISTER.register(name, () -> new TileEntityType<>(factory, ImmutableSet.copyOf(valid), null));

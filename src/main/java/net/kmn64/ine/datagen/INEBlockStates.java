@@ -17,6 +17,7 @@ import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import net.kmn64.ine.ImmersiveNuclearEngineering;
 import net.kmn64.ine.common.INEContent;
+import net.kmn64.ine.common.multiblocks.multiblocks.DistillerMultiblock;
 import net.kmn64.ine.common.multiblocks.multiblocks.OilTankMultiblock;
 import net.kmn64.ine.common.multiblocks.multiblocks.SteelSheetmetalTankMultiblock;
 import net.minecraft.block.Block;
@@ -53,7 +54,7 @@ public class INEBlockStates extends ExtendedBlockstateProvider{
 	}
 	@Override
 	protected void registerStatesAndModels() {
-		// TODO Auto-generated method stub
+		createMultiblock(INEContent.Multiblocks.distiller, split(obj("multiblocks/obj/distiller.obj"),OilTankMultiblock.instance),split(obj("multiblocks/obj/distiller_mirrored.obj"),DistillerMultiblock.instance));
 		createMultiblock(INEContent.Multiblocks.steeltank, split(obj("multiblocks/obj/steel_tank.obj"),SteelSheetmetalTankMultiblock.instance));
 		createMultiblock(INEContent.Multiblocks.oiltank, split(obj("multiblocks/obj/oil_tank.obj"),OilTankMultiblock.instance),split(obj("multiblocks/obj/oil_tank_mirrored.obj"),OilTankMultiblock.instance));
 	}

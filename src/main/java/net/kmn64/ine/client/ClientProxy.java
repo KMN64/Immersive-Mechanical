@@ -17,6 +17,7 @@ import net.kmn64.ine.client.utils.MCUtil;
 import net.kmn64.ine.common.CommonProxy;
 import net.kmn64.ine.common.INETileTypes;
 import net.kmn64.ine.common.items.INEItemMaterialBase;
+import net.kmn64.ine.common.multiblocks.multiblocks.DistillerMultiblock;
 import net.kmn64.ine.common.multiblocks.multiblocks.SteelSheetmetalTankMultiblock;
 import net.kmn64.ine.config.INEServerConfig;
 import net.minecraft.block.BlockState;
@@ -72,7 +73,7 @@ public class ClientProxy extends CommonProxy {
 	public void postInit(){
 	}
 	
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "static-access" })
 	public void completed(){
 		DeferredWorkQueue.runLater(() -> ManualHelper.addConfigGetter(str -> switch(str) {
 		case "steeltank_tanksize"->INEServerConfig.machines.steeltank.steelTank_tankSize.get();
@@ -94,6 +95,7 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	/** Immersive Nuclear-Engineering's Manual Category */
+	private static InnerNode<ResourceLocation, ManualEntry> INE_MULTIBLOCK_CATEGORY;
 	private static InnerNode<ResourceLocation, ManualEntry> ADV_TANK_CATEGORY;
 	private static InnerNode<ResourceLocation, ManualEntry> GEN_I_CATEGORY;
 	private static InnerNode<ResourceLocation, ManualEntry> GEN_II_CATEGORY;
@@ -101,7 +103,7 @@ public class ClientProxy extends CommonProxy {
 	private static InnerNode<ResourceLocation, ManualEntry> GEN_advIII_CATEGORY;
 	private static InnerNode<ResourceLocation, ManualEntry> GEN_IV_CATEGORY;
 	private static InnerNode<ResourceLocation, ManualEntry> MSR_CATEGORY;
-	private static InnerNode<ResourceLocation, ManualEntry> INE_CATEGORY;
+	private static InnerNode<ResourceLocation, ManualEntry> INE_ITEMS_CATEGORY;
 	
 	public void renderTile(TileEntity te, IVertexBuilder iVertexBuilder, MatrixStack transform, IRenderTypeBuffer buffer){
 		
@@ -116,23 +118,45 @@ public class ClientProxy extends CommonProxy {
 	public void setupManualPages(){
 		ManualInstance man = ManualHelper.getManual();
 		
-		ADV_TANK_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"adv_tank"), 100);
+		INE_MULTIBLOCK_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"ine_multiblock"));
+		ADV_TANK_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"adv_tank"));
 		GEN_I_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"gen_1_reactor"));
 		GEN_II_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"gen_2_reactor"));
 		GEN_III_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"gen_3_reactor"));
 		GEN_advIII_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"gen_adv3_reactor"));
 		GEN_IV_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"gen_4_reactor"));
-		INE_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"ine_items"));
+		INE_ITEMS_CATEGORY = man.getRoot().getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"ine_items"));
 		
 		MSR_CATEGORY = GEN_IV_CATEGORY.getOrCreateSubnode(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"msr_reactor"));
 		
+		introductiongenreactor(GEN_I_CATEGORY,0);
+		introductiongenreactor(GEN_II_CATEGORY,0);
 		multiblockadvtankcategory();
 	}
 	
-	private void multiblockadvtankcategory() {
+	private void introductiongenreactor(InnerNode<ResourceLocation, ManualEntry> gen_reactor, int i) {
 		// TODO Auto-generated method stub
+		ManualInstance man = ManualHelper.getManual();
+		
+		ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
+		builder.readFromFile(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"introduction_"+gen_reactor.getNodeData().getPath()));
+		man.addEntry(gen_reactor, builder.create(), i);
+	}
+
+	private void multiblockadvtankcategory() {
+		distiller(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"distiller"),0);
 		steeltank(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"steel_tank"),0);
 		oiltank(new ResourceLocation(ImmersiveNuclearEngineering.MODID,"oil_tank"),1);
+	}
+
+	private void distiller(ResourceLocation resourceLocation, int i) {
+		// TODO Auto-generated method stub
+		ManualInstance man = ManualHelper.getManual();
+		
+		ManualEntry.ManualEntryBuilder builder = new ManualEntry.ManualEntryBuilder(man);
+		builder.addSpecialElement("distiller", 0, () -> new ManualElementMultiblock(man, DistillerMultiblock.instance));
+		builder.readFromFile(resourceLocation);
+		man.addEntry(INE_MULTIBLOCK_CATEGORY, builder.create(), i);
 	}
 
 	private void oiltank(ResourceLocation resourceLocation, int i) {
@@ -167,9 +191,6 @@ public class ClientProxy extends CommonProxy {
 		transform.translate(0.0F, 0.5F, 1.0F);
 		blockRenderer.getModelRenderer().renderModel(transform.last(), buffers.getBuffer(RenderType.solid()), state, model, 1.0F, 1.0F, 1.0F, -1, -1, EmptyModelData.INSTANCE);
 		transform.popPose();
-	}
-	
-	public void openProjectorGui(Hand hand, ItemStack held){
 	}
 	
 	public World getClientWorld(){

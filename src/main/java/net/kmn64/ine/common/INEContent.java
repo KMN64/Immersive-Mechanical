@@ -8,14 +8,19 @@ import org.apache.logging.log4j.Logger;
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import net.kmn64.ine.ImmersiveNuclearEngineering;
+import net.kmn64.ine.common.blocks.INEBlockBase;
 import net.kmn64.ine.common.fluids.*;
 import net.kmn64.ine.common.items.INEItemBase;
 import net.kmn64.ine.common.items.INEItemMaterialBase;
+import net.kmn64.ine.common.multiblocks.blocks.DistillerBlock;
 import net.kmn64.ine.common.multiblocks.blocks.OilTankBlock;
 import net.kmn64.ine.common.multiblocks.blocks.SteelSheetmetalTankBlock;
+import net.kmn64.ine.common.multiblocks.multiblocks.DistillerMultiblock;
 import net.kmn64.ine.common.multiblocks.multiblocks.OilTankMultiblock;
 import net.kmn64.ine.common.multiblocks.multiblocks.SteelSheetmetalTankMultiblock;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -36,6 +41,7 @@ public class INEContent {
 	public static class Multiblocks{
 		public static Block steeltank;
 		public static Block oiltank;
+		public static Block distiller;
 	}
 	
 	public static class Fluids{
@@ -50,11 +56,13 @@ public class INEContent {
 	}
 	
 	public static class Blocks{
+		public static INEBlockBase centrifugecylindershell;
 
 	}
 	
 	public static class Items{
 		public static INEItemBase salt;
+		public static INEItemMaterialBase tungsten;
 		public static INEItemMaterialBase depleteduraniumdioxide;
 		public static INEItemMaterialBase lightlyenricheduraniumdioxide;
 		public static INEItemMaterialBase highlyenricheduraniumdioxide;
@@ -73,16 +81,22 @@ public class INEContent {
 		
 		// Regular salt (NaCl)
 		Items.salt = new INEItemBase("salt");
+		
+		Items.tungsten=new INEItemMaterialBase("tungsten",new String[] {"ingot", "plate", "nugget", "dust", "rod"},0x5b5b5c);
 		Items.depleteduraniumdioxide=new INEItemMaterialBase("depleteduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust"},0x363636);
 		Items.lightlyenricheduraniumdioxide=new INEItemMaterialBase("lightlyenricheduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust", "rod", "fuelpellet"},0x55614c);
 		Items.highlyenricheduraniumdioxide=new INEItemMaterialBase("highlyenricheduraniumdioxide",new String[] {"ingot", "plate", "nugget", "dust", "rod", "fuelpellet"},0x667c59);
 		
+		Blocks.centrifugecylindershell = new INEBlockBase("centrifuge_cylinder_shell",AbstractBlock.Properties.of(Material.METAL));
+		
 		Multiblocks.steeltank = new SteelSheetmetalTankBlock();
 		Multiblocks.oiltank = new OilTankBlock();
+		Multiblocks.distiller = new DistillerBlock();
 		
 		//MultiblockHandler.registerMultiblock(AMultiblock.instance);
 		MultiblockHandler.registerMultiblock(SteelSheetmetalTankMultiblock.instance);
 		MultiblockHandler.registerMultiblock(OilTankMultiblock.instance);
+		MultiblockHandler.registerMultiblock(DistillerMultiblock.instance);
 	}
 	
 	public static void preInit(){
