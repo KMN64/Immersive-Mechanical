@@ -1,13 +1,23 @@
 package net.kmn64.ine;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
 import net.kmn64.ine.client.ClientProxy;
 import net.kmn64.ine.common.CommonProxy;
 import net.kmn64.ine.common.INEContent;
 import net.kmn64.ine.common.INETileTypes;
+import net.kmn64.ine.common.utils.commands.XMLCommand;
 import net.kmn64.ine.config.INEServerConfig;
+import net.minecraft.command.CommandSource;
+import net.minecraft.command.Commands;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,7 +43,7 @@ public class ImmersiveNuclearEngineering
 	// Directly reference a mod ID
 	public static final String MODID = "ine";
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger(MODID);
+    public static final Logger LOGGER = LogManager.getLogger(MODID);
 	public static final ItemGroup CREATIVE_TAB = new ItemGroup(MODID)
 			{
 
@@ -67,7 +77,7 @@ public class ImmersiveNuclearEngineering
 
 
     public ImmersiveNuclearEngineering() {
-    	ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, INEServerConfig.all);
+    	ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, INEServerConfig.all,ImmersiveNuclearEngineering.MODID+"-server.toml");
     	
     	IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register the setup method for modloading
@@ -91,7 +101,7 @@ public class ImmersiveNuclearEngineering
         proxy.registerContainersAndScreens();
     }
 
-    private void setup(final FMLCommonSetupEvent event)
+	private void setup(final FMLCommonSetupEvent event)
     {
     	proxy.setup();
     	proxy.preInit();
@@ -115,7 +125,11 @@ public class ImmersiveNuclearEngineering
 	}
 	
 	public void registerCommand(RegisterCommandsEvent event){
-
+		LiteralArgumentBuilder<CommandSource> ine = Commands.literal(ImmersiveNuclearEngineering.MODID);
+		
+		ine.then(XMLCommand.create());
+		
+		event.getDispatcher().register(ine);
 	}
 	
 	public void addReloadListeners(AddReloadListenerEvent event){

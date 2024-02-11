@@ -27,6 +27,7 @@ public class INEServerConfig
 		
 		machines = new Machines(builder);
 		machines.multiblock = new Machines.Multiblock(builder);
+		machines.distiller = new Machines.Distiller(builder);
 		machines.steeltank = new Machines.SteelTank(builder);
 		
 		all = builder.build();
@@ -54,6 +55,7 @@ public class INEServerConfig
 	
 	public static class Machines {
 		public static Multiblock multiblock;
+		public static Distiller distiller;
 		public static SteelTank steeltank;
 		
 		Machines(ForgeConfigSpec.Builder builder)
@@ -63,12 +65,28 @@ public class INEServerConfig
 		}
 		
 		public static class Multiblock {
+			public final BooleanValue enable_distiller;
 			Multiblock(ForgeConfigSpec.Builder builder)
 			{
 				builder.push("multiblock");
+				enable_distiller = builder.comment("**WARNING** disable this before you load a new world or break the multiblocks before you do this!!! Can the Distiller Multiblock structure be built ? [Default=true]").define("enable_distiller", true);
 				builder.pop();
 			}
 		}
+		
+		public static class Distiller
+		{
+			public final ConfigValue<Integer> distiller_input_tankSize;
+			public final ConfigValue<Integer> distiller_output_tankSize;
+			Distiller(ForgeConfigSpec.Builder builder)
+			{
+				builder.push("distiller");
+				distiller_input_tankSize = builder.comment("The capacity of the input tank for the Distiller [Default=24000]").define("distiller_input_tankSize", 24000);
+				distiller_output_tankSize = builder.comment("The capacity of the output tank for the Distiller [Default=24000]").define("distiller_output_tankSize", 24000);
+				builder.pop();
+			}
+		}
+		
 		public static class SteelTank {
 			public final ConfigValue<Integer> steelTank_tankSize;
 			public final ConfigValue<Integer> steelTank_transferSpeed;

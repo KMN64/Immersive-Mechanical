@@ -1,5 +1,5 @@
-mtllib distiller.mtl
-usemtl distiller
+mtllib distiller_mirrored.mtl
+usemtl distiller_mirrored
 
 o base
 v 0.937500 1.187500 -0.937500
