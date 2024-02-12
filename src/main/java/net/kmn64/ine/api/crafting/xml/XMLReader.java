@@ -24,9 +24,9 @@ public class XMLReader {
 		return new Tuple<String, Boolean>(filepath,filetest.exists());
 	}
 	
-	public static List<RecipeData> loadRecipefromXML(String recipetype)
+	public static List<ReaderRecipeData> loadRecipefromXML(String recipetype)
 	{
-		List<RecipeData> recipelist = new ArrayList<RecipeData>();
+		List<ReaderRecipeData> recipelist = new ArrayList<ReaderRecipeData>();
 		
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();  
 		try {

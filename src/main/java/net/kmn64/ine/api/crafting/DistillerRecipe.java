@@ -10,6 +10,7 @@ import javax.annotation.Nonnull;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import net.kmn64.ine.ImmersiveNuclearEngineering;
+import net.kmn64.ine.common.crafting.Serializers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
@@ -81,9 +82,9 @@ public static final IRecipeType<DistillerRecipe> TYPE = IRecipeType.register(Imm
 	}
 
 	@Override
-	protected IERecipeSerializer getIESerializer() {
+	protected IERecipeSerializer<DistillerRecipe> getIESerializer() {
 		// TODO Auto-generated method stub
-		return null;
+		return Serializers.DISTILLER_SERIALIZER.get();
 	}
 
 }

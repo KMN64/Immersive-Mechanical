@@ -14,6 +14,7 @@ import net.kmn64.ine.client.ClientProxy;
 import net.kmn64.ine.common.CommonProxy;
 import net.kmn64.ine.common.INEContent;
 import net.kmn64.ine.common.INETileTypes;
+import net.kmn64.ine.common.crafting.Serializers;
 import net.kmn64.ine.common.utils.commands.XMLCommand;
 import net.kmn64.ine.config.INEServerConfig;
 import net.minecraft.command.CommandSource;
@@ -92,10 +93,11 @@ public class ImmersiveNuclearEngineering
 		MinecraftForge.EVENT_BUS.addListener(this::registerCommand);
 		MinecraftForge.EVENT_BUS.addListener(this::addReloadListeners);
 		
+		Serializers.RECIPE_SERIALIZERS.register(eventBus);
+		
 		INEContent.populate();
 		INETileTypes.REGISTER.register(eventBus);
         
-        // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         
         proxy.registerContainersAndScreens();

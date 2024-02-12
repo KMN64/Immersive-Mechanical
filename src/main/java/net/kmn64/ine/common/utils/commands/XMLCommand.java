@@ -4,6 +4,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 
+import net.kmn64.ine.api.crafting.xml.XMLWriter;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.util.text.StringTextComponent;
@@ -20,6 +21,13 @@ public class XMLCommand {
 	}
 
 	private static void beginTest(CommandContext<CommandSource> source) {
-		source.getSource().sendSuccess(new StringTextComponent("[Test Writing]Attempt to Write XML file."), false);
+		source.getSource().sendSuccess(new StringTextComponent("[Writing Test]Attempt to Write XML file."), false);
+		boolean isSuccess = XMLWriter.writingTest();
+		if(!isSuccess)
+		{
+			source.getSource().sendFailure(new StringTextComponent("[Writing Test]Failed to Write XML file,check inexml.log to detail information"));
+			return;
+		}
+		
 	}
 }
