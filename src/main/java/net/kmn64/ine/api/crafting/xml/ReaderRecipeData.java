@@ -9,21 +9,15 @@ import net.minecraft.tags.ITag;
 import net.minecraftforge.fluids.FluidStack;
 
 public class ReaderRecipeData {
-	public ReaderRecipeData(ItemStack[] item, FluidStack[] fluid, HashMap<ITag.INamedTag<Item>, Integer> tagitem,
-			INEFluidTagInput[] tagfluid, int time, int energy) {
-		this.item = item;
-		this.fluid = fluid;
-		this.tagitem = tagitem;
-		this.tagfluid = tagfluid;
+	public ReaderRecipeData(RecipeData inputData, RecipeData outputData, int time, int energy) {
+		this.inputData = inputData;
+		this.outputData = outputData;
 		this.time = time;
 		this.energy = energy;
 	}
 	
-	public ItemStack[] item;
-	public FluidStack[] fluid;
-	
-	public HashMap<ITag.INamedTag<Item>,Integer> tagitem;
-	public INEFluidTagInput[] tagfluid;
+	public RecipeData inputData;
+	public RecipeData outputData;
 	
 	public int time;
 	public int energy;

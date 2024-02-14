@@ -21,14 +21,14 @@ public class XMLCommand {
 	}
 
 	private static void beginTest(CommandContext<CommandSource> source) {
-		source.getSource().sendSuccess(new StringTextComponent("[Writing Test]Attempt to Write XML file."), false);
+		source.getSource().sendSuccess(new StringTextComponent("[Writing Test]Attempt to Write XML file."), true);
 		boolean isSuccess = XMLWriter.writingTest();
 		if(!isSuccess)
 		{
 			source.getSource().sendFailure(new StringTextComponent("[Writing Test]Failed to Write XML file,check inexml.log to detail information"));
 			return;
 		}
-		source.getSource().sendSuccess(new StringTextComponent("[Reading Test]Attempt to Read XML file."), isSuccess);
+		source.getSource().sendSuccess(new StringTextComponent("[Reading Test]Attempt to Read XML file."), true);
 		
 	}
 }

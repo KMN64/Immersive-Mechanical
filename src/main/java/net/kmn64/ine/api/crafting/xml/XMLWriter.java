@@ -25,6 +25,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ITag;
+import net.minecraft.tags.ITag.INamedTag;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -54,23 +55,34 @@ public class XMLWriter {
 	        recipeElement.setAttributeNode(energyattribute);
 	        recipesElement.appendChild(recipeElement);
 	        
-	        ItemStack[] items = recipedata.items;
-	        FluidStack[] fluids = recipedata.fluids;
+	        ItemStack[] inputitems = recipedata.inputData.items;
+	        FluidStack[] inputfluids = recipedata.inputData.fluids;
 	        
-	        Map<ITag.INamedTag<Item>,Integer> tagitems = recipedata.tagitems;
-	        INEFluidTagInput[] tagfluids = recipedata.tagfluids;
+	        Map<ITag.INamedTag<Item>,Integer> inputtagitems = recipedata.inputData.tagitems;
+	        INEFluidTagInput[] inputtagfluids = recipedata.inputData.tagfluids;
 	        
-	        if (items !=null)
-	        	writerecipeitemsinput(doc,recipeElement,items);
+	        ItemStack[] outputitems = recipedata.inputData.items;
+	        FluidStack[] outputfluids = recipedata.inputData.fluids;
 	        
-	        if (fluids !=null)
-	        	writerecipefluidsinput(doc,recipeElement,fluids);
+	        //Input
+	        if (inputitems !=null)
+	        	writerecipeitemsinput(doc,recipeElement,inputitems);
 	        
-	        if (tagitems !=null)
-	        	writerecipetagitemsinput(doc,recipeElement,tagitems);
+	        if (inputfluids !=null)
+	        	writerecipefluidsinput(doc,recipeElement,inputfluids);
 	        
-	        if (tagfluids !=null)
-	        	writerecipetagfluidsinput(doc,recipeElement,tagfluids);
+	        if (inputtagitems !=null)
+	        	writerecipetagitemsinput(doc,recipeElement,inputtagitems);
+	        
+	        if (inputtagfluids !=null)
+	        	writerecipetagfluidsinput(doc,recipeElement,inputtagfluids);
+	        
+	        // Output
+	        if (outputitems !=null)
+	        	writerecipeitemsoutput(doc,recipeElement,outputitems);
+	        
+	        if (outputfluids !=null)
+	        	writerecipefluidsoutput(doc,recipeElement,outputfluids);
 	        
 	        // XML transformer
 	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -93,12 +105,39 @@ public class XMLWriter {
         return true;
 	}
 
-	
+	@SuppressWarnings("deprecation")
+	private static void writerecipefluidsoutput(Document document, Element recipeElement, FluidStack[] fluids) {
+		// TODO Auto-generated method stub
+		for (FluidStack fluid : fluids)
+        {
+        	Element inputElement = document.createElement(elements[3]);
+        	Element typeElement = document.createElement(attributes[1]);
+        	inputElement.setTextContent(Registry.FLUID.getKey(fluid.getFluid()).toString()+";"+fluid.getAmount());
+        	inputElement.appendChild(typeElement);
+            recipeElement.appendChild(inputElement);
+        }
+	}
+
+
+	@SuppressWarnings("deprecation")
+	private static void writerecipeitemsoutput(Document document, Element recipeElement, ItemStack[] items) {
+		// TODO Auto-generated method stub
+		for (ItemStack item : items)
+        {
+        	Element inputElement = document.createElement(elements[3]);
+        	Element typeElement = document.createElement(elements_new[0]);
+        	inputElement.setTextContent(Registry.ITEM.getKey(item.getItem()).toString()+";"+item.getCount());
+        	inputElement.appendChild(typeElement);
+        	recipeElement.appendChild(inputElement);
+        }
+	}
+
+
 	private static void writerecipetagfluidsinput(Document document, Element recipeElement, INEFluidTagInput[] tagfluids) {
 		// TODO Auto-generated method stub
 		for (INEFluidTagInput tagfluid:tagfluids)
 		{
-			Element inputElement = document.createElement(elements[2]);
+			Element inputElement = document.createElement(elements[4]);
 			Element typeElement = document.createElement(elements_new[1]);
         	inputElement.setTextContent(tagfluid.getNamedFluidTag()+";"+tagfluid.getAmount());
         	inputElement.appendChild(typeElement);
@@ -124,7 +163,7 @@ public class XMLWriter {
 		for (FluidStack fluid : fluids)
         {
         	Element inputElement = document.createElement(elements[2]);
-        	Element typeElement = document.createElement(attributes[1]);
+        	Element typeElement = document.createElement(elements_new[1]);
         	inputElement.setTextContent(Registry.FLUID.getKey(fluid.getFluid()).toString()+";"+fluid.getAmount());
         	inputElement.appendChild(typeElement);
             recipeElement.appendChild(inputElement);
