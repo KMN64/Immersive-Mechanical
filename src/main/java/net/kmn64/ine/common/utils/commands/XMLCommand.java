@@ -28,6 +28,7 @@ public class XMLCommand {
 			source.getSource().sendFailure(new StringTextComponent("[Writing Test]Failed to Write XML file,check inexml.log to detail information"));
 			return;
 		}
+		source.getSource().sendSuccess(new StringTextComponent("[Reading Test]Attempt to Read XML file."), isSuccess);
 		
 	}
 }

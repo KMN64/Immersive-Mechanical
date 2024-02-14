@@ -31,8 +31,9 @@ import net.minecraftforge.fluids.FluidStack;
 public class XMLWriter {
 	private static final String recipepath="config/ine/recipes";
 	
-	private static final String[] elements = new String[] {"Recipes","Recipe","Input","Output","Inputtag"};
-	private static final String[] attributes = new String[] {"time","energy","type"};
+	private static final String[] elements = new String[] {"Recipes","Recipe","Input","Output","InputTag"};
+	private static final String[] attributes = new String[] {"time","energy"};
+	private static final String[] elements_new = new String[] {"ItemStack","FluidStack"};
 	
 	public static boolean writeXMLfromRecipe(WriterRecipeData recipedata)
 	{
@@ -98,10 +99,9 @@ public class XMLWriter {
 		for (INEFluidTagInput tagfluid:tagfluids)
 		{
 			Element inputElement = document.createElement(elements[2]);
-        	Attr typeattribute = document.createAttribute(attributes[2]);
-        	typeattribute.setValue("fluid");
-        	inputElement.setAttributeNode(typeattribute);
+			Element typeElement = document.createElement(elements_new[1]);
         	inputElement.setTextContent(tagfluid.getNamedFluidTag()+";"+tagfluid.getAmount());
+        	inputElement.appendChild(typeElement);
             recipeElement.appendChild(inputElement);
 		}
 	}
@@ -110,11 +110,10 @@ public class XMLWriter {
 	private static void writerecipetagitemsinput(Document document, Element recipeElement, Map<ITag.INamedTag<Item>,Integer> tagitems) {
 		// TODO Auto-generated method stub
 		tagitems.forEach((tagitem,amount)->{
-			Element inputElement = document.createElement(elements[2]);
-        	Attr typeattribute = document.createAttribute(attributes[2]);
-        	typeattribute.setValue("fluid");
-        	inputElement.setAttributeNode(typeattribute);
+			Element inputElement = document.createElement(elements[4]);
+			Element typeElement = document.createElement(elements_new[0]);
         	inputElement.setTextContent(tagitem.getName().toString()+";"+amount);
+        	inputElement.appendChild(typeElement);
             recipeElement.appendChild(inputElement);
 		});
 	}
@@ -125,10 +124,9 @@ public class XMLWriter {
 		for (FluidStack fluid : fluids)
         {
         	Element inputElement = document.createElement(elements[2]);
-        	Attr typeattribute = document.createAttribute(attributes[2]);
-        	typeattribute.setValue("fluid");
-        	inputElement.setAttributeNode(typeattribute);
+        	Element typeElement = document.createElement(attributes[1]);
         	inputElement.setTextContent(Registry.FLUID.getKey(fluid.getFluid()).toString()+";"+fluid.getAmount());
+        	inputElement.appendChild(typeElement);
             recipeElement.appendChild(inputElement);
         }
 	}
@@ -139,11 +137,10 @@ public class XMLWriter {
 		for (ItemStack item : items)
         {
         	Element inputElement = document.createElement(elements[2]);
-        	Attr typeattribute = document.createAttribute(attributes[2]);
-        	typeattribute.setValue("item");
-        	inputElement.setAttributeNode(typeattribute);
+        	Element typeElement = document.createElement(elements_new[0]);
         	inputElement.setTextContent(Registry.ITEM.getKey(item.getItem()).toString()+";"+item.getCount());
-            recipeElement.appendChild(inputElement);
+        	inputElement.appendChild(typeElement);
+        	recipeElement.appendChild(inputElement);
         }
 	}
 	
