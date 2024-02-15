@@ -22,7 +22,9 @@ import net.kmn64.ine.ImmersiveNuclearEngineering;
 import net.kmn64.ine.common.utils.INEFluidTagInput;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.util.registry.Registry;
@@ -39,7 +41,7 @@ public class XMLReader {
 	
 	/**
 	 * @param recipetype
-	 * @return
+	 * @return A list of {@code ReaderRecipeData}
 	 */
 	public static List<ReaderRecipeData> loadRecipefromXML(String recipetype)
 	{
@@ -90,11 +92,34 @@ public class XMLReader {
 					
 					inputMap.forEach((a,b)->{
 						Map<String,Integer> stack = splitToStack(b);
-						String itemid = stack.keySet().toArray(new String[0])[0];
+						String id = stack.keySet().toArray(new String[0])[0];
+						int amount = stack.get(id);
 						
 						if (a=="ItemStack")
-							inputItemStack.add(new ItemStack(Registry.ITEM.get(new ResourceLocation(itemid))));
+							inputItemStack.add(new ItemStack(Registry.ITEM.get(new ResourceLocation(id)),amount));
+						if (a=="ItemStackTag")
+							inputItemTag.put(ItemTags.bind(id),amount);
+						
+						if (a=="FluidStack")
+							inputFluidStack.add(new FluidStack(Registry.FLUID.get(new ResourceLocation(id)),amount));
+						if (a=="FluidStackTag")
+							inputFluidTag.add(new INEFluidTagInput(FluidTags.bind(id),amount));
 					});
+					
+					outputMap.forEach((a,b)->{
+						Map<String,Integer> stack = splitToStack(b);
+						String id = stack.keySet().toArray(new String[0])[0];
+						int amount = stack.get(id);
+						
+						if (a=="ItemStack")
+							outputItemStack.add(new ItemStack(Registry.ITEM.get(new ResourceLocation(id)),amount));
+						if (a=="FluidStack")
+							outputFluidStack.add(new FluidStack(Registry.FLUID.get(new ResourceLocation(id)),amount));
+					});
+					
+					RecipeData INPUT = new RecipeData(inputItemStack.toArray(new ItemStack[0]), inputFluidStack.toArray(new FluidStack[0]), inputItemTag, inputFluidTag.toArray(new INEFluidTagInput[0]));
+					RecipeData OUTPUT = new RecipeData(outputItemStack.toArray(new ItemStack[0]), outputFluidStack.toArray(new FluidStack[0]), null,null);
+					recipelist.add(new ReaderRecipeData(INPUT,OUTPUT,time,energy));
 				}
 			}
 		} catch (Exception e) {

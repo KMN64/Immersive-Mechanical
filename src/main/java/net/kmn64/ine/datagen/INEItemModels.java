@@ -42,6 +42,8 @@ public class INEItemModels extends ItemModelProvider{
 	@Override
 	protected void registerModels() {
 		// TODO Auto-generated method stub
+		genericItem(INEContent.Items.salt);
+		
 		INEItemMaterialBase.arrlist.forEach((a)->{
 			genericMaterialItem(a);
 		});
