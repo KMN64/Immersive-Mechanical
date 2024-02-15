@@ -4,6 +4,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 
+import net.kmn64.ine.api.crafting.xml.XMLReader;
 import net.kmn64.ine.api.crafting.xml.XMLWriter;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -29,6 +30,7 @@ public class XMLCommand {
 			return;
 		}
 		source.getSource().sendSuccess(new StringTextComponent("[Reading Test]Attempt to Read XML file."), true);
+		XMLReader.loadRecipefromXML("test");
 		
 	}
 }

@@ -19,8 +19,14 @@ import org.w3c.dom.NodeList;
 
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import net.kmn64.ine.ImmersiveNuclearEngineering;
+import net.kmn64.ine.common.utils.INEFluidTagInput;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
+import net.minecraft.util.registry.Registry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class XMLReader {
 	private static final String[] elements = new String[] {"Recipes","Recipe","Input","Output","Inputtag"};
@@ -31,6 +37,10 @@ public class XMLReader {
 		return new Tuple<String, Boolean>(filepath,filetest.exists());
 	}
 	
+	/**
+	 * @param recipetype
+	 * @return
+	 */
 	public static List<ReaderRecipeData> loadRecipefromXML(String recipetype)
 	{
 		List<ReaderRecipeData> recipelist = new ArrayList<ReaderRecipeData>();
@@ -45,11 +55,8 @@ public class XMLReader {
 			
 			Document doc = db.parse(_tuple.getA());
 			doc.getDocumentElement().normalize();
-			NodeList recipe = doc.getElementsByTagName(elements[0]);
+			NodeList recipe = doc.getElementsByTagName(elements[1]);
 			
-			NodeList input = null;
-			NodeList output = null;
-			NodeList inputtag = null;
 			int time,energy;
 			for (int i = 0; i<recipe.getLength();i++)
 			{
@@ -58,21 +65,38 @@ public class XMLReader {
 				if (node.getNodeType()==Node.ELEMENT_NODE)
 				{
 					Element element = (Element)node;
-					input = element.getElementsByTagName(elements[0]);
-					output = element.getElementsByTagName(elements[1]);
-					inputtag = element.getElementsByTagName(elements[2]);
-				}
-				
-				if (input!=null&&output!=null&&inputtag!=null)
-				{
-					if (input!=null)
-					time = Integer.valueOf(attribute.getAttributes().item(0).getTextContent());
-					energy = Integer.valueOf(attribute.getAttributes().item(1).getTextContent());
+					Attr timeAttribute = element.getAttributeNode("time");
+					Attr energyAttribute = element.getAttributeNode("energy");
+					time = Integer.valueOf(timeAttribute.getAttributes().item(0).getTextContent());
+					energy = Integer.valueOf(energyAttribute.getAttributes().item(1).getTextContent());
+					
+					NodeList input = element.getElementsByTagName(elements[2]);
+					NodeList output = element.getElementsByTagName(elements[3]);
+					NodeList inputtag = element.getElementsByTagName(elements[4]);
+					
+					Map<String,String> inputMap = readrecipe(input);
+					inputMap.putAll(readrecipetag(inputtag));
+					Map<String,String> outputMap = readrecipe(output);
+					
+					// Input
+					List<ItemStack> inputItemStack = new ArrayList<>();
+					List<FluidStack> inputFluidStack = new ArrayList<>();
+					Map<ITag.INamedTag<Item>,Integer> inputItemTag = new HashMap<>();
+					List<INEFluidTagInput> inputFluidTag = new ArrayList<>();
+					
+					// Output
+					List<ItemStack> outputItemStack = new ArrayList<>();
+					List<FluidStack> outputFluidStack = new ArrayList<>();
+					
+					inputMap.forEach((a,b)->{
+						Map<String,Integer> stack = splitToStack(b);
+						String itemid = stack.keySet().toArray(new String[0])[0];
+						
+						if (a=="ItemStack")
+							inputItemStack.add(new ItemStack(Registry.ITEM.get(new ResourceLocation(itemid))));
+					});
 				}
 			}
-			
-			readrecipefrominput(input);
-			
 		} catch (Exception e) {
 			ImmersiveNuclearEngineering.LOGGER.fatal(e.toString());
 		}
@@ -80,19 +104,70 @@ public class XMLReader {
 		return recipelist;
 	}
 
-	private static Map<String,String> readrecipefrominput(NodeList input) {
-		if (input == null) return Map.of();
+	private static Map<String, Integer> splitToStack(String str) {
+		// TODO Auto-generated method stub
+		Map<String,Integer> hashmap = new HashMap<>();
+		String[] splited = str.split(";");
+		
+		hashmap.put(splited[0],Integer.valueOf(splited[1]));
+		
+		return hashmap;
+	}
+
+	private static Map<String,String> readrecipe(NodeList nodelist) {
+		if (nodelist == null) return Map.of();
 		
 		HashMap<String,String> hashmap =new HashMap<>();
 		
-		for(int i=0;i<input.getLength();i++)
+		Node node = nodelist.item(0);
+		if (node.getNodeType()==Node.ELEMENT_NODE)
 		{
-			Node node = input.item(i);
+			Element recipeElement = (Element)node;
+			NodeList itemStackNodes = recipeElement.getElementsByTagName("ItemStack");
+			NodeList fluidStackNodes = recipeElement.getElementsByTagName("FluidStack");
 			
-			if (node.getNodeType()==Node.ELEMENT_NODE)
-			{
-				Element inputElement = (Element)node;
-				hashmap.put(inputElement.getAttribute("type"),inputElement.getTextContent());
+			for (int j = 0; j < itemStackNodes.getLength(); j++) {
+				Node _node = itemStackNodes.item(j);
+				
+				if (_node.getNodeType()==Node.ELEMENT_NODE)
+					hashmap.put("ItemStack",((Element)_node).getTextContent());
+			}
+					
+			for (int k = 0; k < fluidStackNodes.getLength(); k++) {
+				Node _node = fluidStackNodes.item(k);
+				
+				if (_node.getNodeType()==Node.ELEMENT_NODE)
+					hashmap.put("FluidStack",((Element)_node).getTextContent());
+			}
+		}
+		
+		return hashmap;
+	}
+	
+	private static Map<String,String> readrecipetag(NodeList nodelist) {
+		if (nodelist == null) return Map.of();
+		
+		HashMap<String,String> hashmap =new HashMap<>();
+		
+		Node node = nodelist.item(0);
+		if (node.getNodeType()==Node.ELEMENT_NODE)
+		{
+			Element recipeElement = (Element)node;
+			NodeList itemStackNodes = recipeElement.getElementsByTagName("ItemStack");
+			NodeList fluidStackNodes = recipeElement.getElementsByTagName("FluidStack");
+			
+			for (int j = 0; j < itemStackNodes.getLength(); j++) {
+				Node _node = itemStackNodes.item(j);
+				
+				if (_node.getNodeType()==Node.ELEMENT_NODE)
+					hashmap.put("ItemStackTag",((Element)_node).getTextContent());
+			}
+					
+			for (int k = 0; k < fluidStackNodes.getLength(); k++) {
+				Node _node = fluidStackNodes.item(k);
+				
+				if (_node.getNodeType()==Node.ELEMENT_NODE)
+					hashmap.put("FluidStackTag",((Element)_node).getTextContent());
 			}
 		}
 		

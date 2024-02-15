@@ -111,7 +111,7 @@ public class XMLWriter {
 		for (FluidStack fluid : fluids)
         {
         	Element inputElement = document.createElement(elements[3]);
-        	Element typeElement = document.createElement(attributes[1]);
+        	Element typeElement = document.createElement(elements_new[1]);
         	inputElement.setTextContent(Registry.FLUID.getKey(fluid.getFluid()).toString()+";"+fluid.getAmount());
         	inputElement.appendChild(typeElement);
             recipeElement.appendChild(inputElement);
