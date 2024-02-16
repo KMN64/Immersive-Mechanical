@@ -8,8 +8,7 @@ import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import net.kmn64.ine.api.crafting.DistillerRecipe;
-import net.kmn64.ine.api.crafting.xml.ReaderRecipeData;
-import net.kmn64.ine.api.crafting.xml.XMLReader;
+import net.kmn64.ine.api.crafting.builders.UtilRecipeBuilder;
 import net.kmn64.ine.common.INEContent.Multiblocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -67,7 +66,7 @@ public class DistillerRecipeSerializer extends IERecipeSerializer<DistillerRecip
 		int time = JSONUtils.getAsInt(json, "time");
 		int energy = JSONUtils.getAsInt(json, "energy");
 		
-		return null;
+		return new DistillerRecipe(id,inputFluid,output,itemWithChance.getA(),time,energy,itemWithChance.getB().floatValue());
 	}
 
 }

@@ -8,17 +8,22 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableSet;
 
+import blusunrize.immersiveengineering.api.IEEnums.IOSideConfig;
 import blusunrize.immersiveengineering.api.utils.shapes.CachedShapesWithTransform;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IBlockBounds;
+import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces.IInteractionObjectIE;
 import blusunrize.immersiveengineering.common.blocks.generic.PoweredMultiblockTileEntity;
 import net.kmn64.ine.api.crafting.DistillerRecipe;
 import net.kmn64.ine.common.INETileTypes;
 import net.kmn64.ine.common.multiblocks.multiblocks.DistillerMultiblock;
 import net.kmn64.ine.common.utils.AABBUtils;
+import net.kmn64.ine.common.utils.FluidHelper;
 import net.kmn64.ine.config.INEServerConfig;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -27,11 +32,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidTank;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 
-public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTileEntity,DistillerRecipe> implements IBlockBounds {
+public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTileEntity,DistillerRecipe> implements IInteractionObjectIE, IBlockBounds {
 
 	/** Template-Location of the Fluid Input Port. (1 0 0)<br> */
 	public static final BlockPos Fluid_IN = new BlockPos(1, 0, 0);
@@ -70,6 +81,68 @@ public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTi
 		nbt.put("tank0", this.tanks[0].writeToNBT(new CompoundNBT()));
 		nbt.put("tank1", this.tanks[1].writeToNBT(new CompoundNBT()));
 	}
+	
+	@Override
+	public void tick(){
+		super.tick();
+		
+		if(this.level.isClientSide || isDummy() || isRSDisabled()){
+			return;
+		}
+		
+		boolean update = false;
+		
+		if(this.energyStorage.getEnergyStored() > 0 && this.processQueue.size() < getProcessQueueMaxLength()){
+			if(this.tanks[0].getFluidAmount() > 0){
+				DistillerRecipe recipe = DistillerRecipe.findRecipe(this.tanks[0].getFluid());
+				
+				if(recipe != null && this.energyStorage.getEnergyStored() >= recipe.getTotalProcessEnergy()){
+					if(this.tanks[0].getFluidAmount() >= recipe.getInputFluid().getAmount()){
+						int[] inputs, inputAmounts;
+						
+						inputs = new int[]{0};
+						inputAmounts = new int[]{recipe.getInputFluid().getAmount()};
+						
+						MultiblockProcessInMachine<DistillerRecipe> process = new MultiblockProcessInMachine<DistillerRecipe>(recipe)
+								.setInputTanks(inputs)
+								.setInputAmounts(inputAmounts);
+						if(addProcessToQueue(process, true)){
+							addProcessToQueue(process, false);
+							update = true;
+						}
+					}
+				}
+			}
+		}
+		
+		if(!this.processQueue.isEmpty()){
+			update = true;
+		}
+		
+		
+		if(this.tanks[1].getFluidAmount() > 0){
+			BlockPos outPos = getBlockPosForPos(Fluid_OUT).above();
+			update |= FluidUtil.getFluidHandler(this.level, outPos, Direction.DOWN).map(output -> {
+				boolean ret = false;
+				FluidStack target = this.tanks[1].getFluid();
+				target = FluidHelper.copyFluid(target, Math.min(target.getAmount(), 1000));
+				
+				int accepted = output.fill(target, FluidAction.SIMULATE);
+				if(accepted > 0){
+					int drained = output.fill(FluidHelper.copyFluid(target, Math.min(target.getAmount(), accepted)), FluidAction.EXECUTE);
+					
+					this.tanks[1].drain(new FluidStack(target.getFluid(), drained), FluidAction.EXECUTE);
+					ret |= true;
+				}
+				
+				return ret;
+			}).orElse(false);
+		}
+		
+		if(update){
+			updateMasterBlock(null, true);
+		}
+	}
 
 	@Override
 	public void doGraphicalUpdates() {
@@ -97,9 +170,14 @@ public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTi
 	}
 
 	@Override
-	public boolean additionalCanProcessCheck(MultiblockProcess<DistillerRecipe> arg0) {
+	public boolean additionalCanProcessCheck(MultiblockProcess<DistillerRecipe> process) {
 		// TODO Auto-generated method stub
-		return true;
+		int outputAmount = 0;
+		for(FluidStack outputFluid:process.recipe.getFluidOutputs()){
+			outputAmount += outputFluid.getAmount();
+		}
+		
+		return this.tanks[1].getCapacity() >= (this.tanks[1].getFluidAmount() + outputAmount);
 	}
 
 	@Override
@@ -109,9 +187,36 @@ public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTi
 	}
 
 	@Override
-	public void doProcessOutput(ItemStack arg0) {
+	public void doProcessOutput(ItemStack output) {
 		// TODO Auto-generated method stub
+		Direction outputdir = (getIsMirrored() ? getFacing().getClockWise() : getFacing().getCounterClockWise());
+		BlockPos outputpos = getBlockPosForPos(Item_OUT).offset(outputdir.getStepX(),outputdir.getStepY(),outputdir.getStepZ());
 		
+		TileEntity te = level.getBlockEntity(outputpos);
+		if(te != null){
+			IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, outputdir.getOpposite()).orElse(null);
+			if(handler != null){
+				output = ItemHandlerHelper.insertItem(handler, output, false);
+			}
+		}
+		
+		if(!output.isEmpty()){
+			double x = outputpos.getX() + 0.5;
+			double y = outputpos.getY() + 0.25;
+			double z = outputpos.getZ() + 0.5;
+			
+			Direction facing = getIsMirrored() ? getFacing().getOpposite() : getFacing();
+			if(facing != Direction.EAST && facing != Direction.WEST){
+				x = outputpos.getX() + (facing == Direction.SOUTH ? 0.15 : 0.85);
+			}
+			if(facing != Direction.NORTH && facing != Direction.SOUTH){
+				z = outputpos.getZ() + (facing == Direction.WEST ? 0.15 : 0.85);
+			}
+			
+			ItemEntity ei = new ItemEntity(level, x, y, z, output.copy());
+			ei.lerpMotion(0.075 * outputdir.getStepX(), 0.025, 0.075 * outputdir.getStepZ());
+			level.addFreshEntity(ei);
+		}
 	}
 
 	@Override
@@ -136,6 +241,15 @@ public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTi
 		// TODO Auto-generated method stub
 		return this.tanks;
 	}
+	
+	@Override
+	public IOSideConfig getEnergySideConfig(Direction facing){
+		if(this.formed && this.isEnergyPos() && (facing == null || facing == Direction.UP)){
+			return IOSideConfig.INPUT;
+		}
+		
+		return IOSideConfig.NONE;
+	}
 
 	@Override
 	public int getMaxProcessPerTick() {
@@ -146,7 +260,7 @@ public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTi
 	@Override
 	public float getMinProcessDistance(MultiblockProcess<DistillerRecipe> arg0) {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1.0f;
 	}
 
 	@Override
@@ -170,7 +284,7 @@ public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTi
 	@Override
 	protected DistillerRecipe getRecipeForId(ResourceLocation arg0) {
 		// TODO Auto-generated method stub
-		return null;
+		return DistillerRecipe.recipes.get(arg0);
 	}
 
 	@Override
@@ -186,14 +300,33 @@ public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTi
 	}
 
 	@Override
-	protected boolean canDrainTankFrom(int arg0, Direction arg1) {
+	protected boolean canDrainTankFrom(int arg0, Direction side) {
 		// TODO Auto-generated method stub
+		if(this.posInMultiblock.equals(Fluid_OUT) && (side == null || side == getFacing().getOpposite())){
+			DistillerTileEntity master = master();
+			
+			if(master != null && master.tanks[1].getFluidAmount() > 0){
+				if(!master.tanks[1].isEmpty())
+					return DistillerRecipe.hasRecipeWithInput(master.tanks[0].getFluid(), true);
+			}
+		}
 		return false;
 	}
 
 	@Override
-	protected boolean canFillTankFrom(int arg0, Direction arg1, FluidStack arg2) {
+	protected boolean canFillTankFrom(int arg0, Direction side, FluidStack resource) {
 		// TODO Auto-generated method stub
+		if(this.posInMultiblock.equals(Fluid_IN) && (side == null || side == getFacing().getOpposite())){
+			DistillerTileEntity master = master();
+			
+			if(master != null && master.tanks[0].getFluidAmount() < master.tanks[0].getCapacity()){
+				if(master.tanks[0].isEmpty()){
+					return DistillerRecipe.hasRecipeWithInput(resource, true);
+				}else{
+					return resource.isFluidEqual(master.tanks[0].getFluid());
+				}
+			}
+		}
 		return false;
 	}
 
@@ -221,11 +354,17 @@ public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTi
 	}
 	
 	private static List<AxisAlignedBB> getShape(BlockPos posInMultiblock){
-		final int bX = posInMultiblock.getX();
-		final int bY = posInMultiblock.getY();
-		final int bZ = posInMultiblock.getZ();
+		final BlockPos bp = posInMultiblock.offset(1, 1, 1).offset(Direction.EAST.getStepX(),Direction.EAST.getStepY(),Direction.EAST.getStepZ());
+		final int bX = bp.getX();
+		final int bY = bp.getY();
+		final int bZ = bp.getZ();
+		final int pos = bX+bY+bZ;
 		
 		List<AxisAlignedBB> main = new ArrayList<>();
+		
+		if(pos > 0 && pos < 9 && pos != 5 && pos != 3 && pos != 7) AABBUtils.box16(main,0, 0, 0, 1, 0.5, 1);
+		if(pos == 11) AABBUtils.box16(main,0, 0,0, 0.5, 1, 1);
+		if(pos == 21 || pos == 24) AABBUtils.box16(main,0, 0, 0, 1, 0.5, 1);
 		
 		// Use default cube shape if nessesary
 		if(main.isEmpty()){
@@ -233,6 +372,18 @@ public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTi
 		}
 		return main;
 		
+	}
+
+	@Override
+	public IInteractionObjectIE getGuiMaster() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canUseGui(PlayerEntity param1PlayerEntity) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

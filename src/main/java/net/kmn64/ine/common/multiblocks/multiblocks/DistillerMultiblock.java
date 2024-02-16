@@ -23,7 +23,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class DistillerMultiblock extends IETemplateMultiblock  {
 	public static final DistillerMultiblock instance = new DistillerMultiblock();
 	public DistillerMultiblock() {
-		super(new ResourceLocation(ImmersiveNuclearEngineering.MODID, "multiblocks/distiller"), BlockPos.ZERO, new BlockPos(1,1,1), new BlockPos(3,3,3), ()->INEContent.Multiblocks.distiller.defaultBlockState());
+		super(new ResourceLocation(ImmersiveNuclearEngineering.MODID, "multiblocks/distiller"), new BlockPos(1,1,1), new BlockPos(1,1,1), new BlockPos(3,3,3), ()->INEContent.Multiblocks.distiller.defaultBlockState());
 		// TODO Auto-generated constructor stub
 	}
 
