@@ -1,14 +1,21 @@
 package net.kmn64.ine.common.crafting.serializer;
 
+import java.util.List;
+
 import com.google.gson.JsonObject;
 
+import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.crafting.FluidTagInput;
 import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import net.kmn64.ine.api.crafting.DistillerRecipe;
+import net.kmn64.ine.api.crafting.xml.ReaderRecipeData;
+import net.kmn64.ine.api.crafting.xml.XMLReader;
 import net.kmn64.ine.common.INEContent.Multiblocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Tuple;
 import net.minecraftforge.fluids.FluidStack;
 
 public class DistillerRecipeSerializer extends IERecipeSerializer<DistillerRecipe> {
@@ -50,8 +57,16 @@ public class DistillerRecipeSerializer extends IERecipeSerializer<DistillerRecip
 	}
 
 	@Override
-	public DistillerRecipe readFromJson(ResourceLocation paramResourceLocation, JsonObject paramJsonObject) {
-		// TODO Auto-generated method stub
+	public DistillerRecipe readFromJson(ResourceLocation id, JsonObject json) {
+		// TODO Remove XRS,long live JRS (JSON Recipes System)
+		FluidStack output = ApiUtils.jsonDeserializeFluidStack(JSONUtils.getAsJsonObject(json, "result"));
+		FluidTagInput inputFluid = FluidTagInput.deserialize(JSONUtils.getAsJsonObject(json, "input"));
+		
+		Tuple<ItemStack, Double> itemWithChance = UtilRecipeBuilder.deserializeItemStackWithChance(json.get("secondary_result").getAsJsonObject());
+		
+		int time = JSONUtils.getAsInt(json, "time");
+		int energy = JSONUtils.getAsInt(json, "energy");
+		
 		return null;
 	}
 

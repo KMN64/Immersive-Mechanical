@@ -225,11 +225,7 @@ public class DistillerTileEntity extends PoweredMultiblockTileEntity<DistillerTi
 		final int bY = posInMultiblock.getY();
 		final int bZ = posInMultiblock.getZ();
 		
-		int pos = bX+bY+bZ;
 		List<AxisAlignedBB> main = new ArrayList<>();
-		
-		if(pos > 0 && pos < 9 && pos != 5 && pos != 3 && pos != 7) AABBUtils.box(main,0, 0, 0, 1, .5f, 1);
-		if(pos == 11) AABBUtils.box(main, 0, 0, 0, 1,1,.5f);
 		
 		// Use default cube shape if nessesary
 		if(main.isEmpty()){

@@ -15,7 +15,6 @@ import net.kmn64.ine.common.CommonProxy;
 import net.kmn64.ine.common.INEContent;
 import net.kmn64.ine.common.INETileTypes;
 import net.kmn64.ine.common.crafting.Serializers;
-import net.kmn64.ine.common.utils.commands.XMLCommand;
 import net.kmn64.ine.config.INEServerConfig;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -129,7 +128,7 @@ public class ImmersiveNuclearEngineering
 	public void registerCommand(RegisterCommandsEvent event){
 		LiteralArgumentBuilder<CommandSource> ine = Commands.literal(ImmersiveNuclearEngineering.MODID);
 		
-		ine.then(XMLCommand.create());
+		//ine.then(XMLCommand.create());
 		
 		event.getDispatcher().register(ine);
 	}
