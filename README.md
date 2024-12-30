@@ -1,15 +1,11 @@
-(logo goes here)
+# Immersive-Mechanical
+- Adding (mainly multiblock stuff) Mechanical (to make electricity) to Immersive Engineering !
+- Abandoned
 
-# Immersive-Nuclear-Engineering
-Adding Nuclear Engineering to Immersive Engineering !
+---
 
-# Preview / Things to add:
-Preview: A mod that add nuclear engineering(i.e Lightly Enriched Uranium Dioxide (LEU),Molten FLiBe (a mixture of Fluorine,Lithium,Beryllium)) to Immersive Engineering mod
+# (Planning for the future - <em>2025?</em>)
+- Read todo.md
+- Planning to add Melting Crucible and Casting Basin<sup><small>(*)</small></sup> first
 
-Things to add (in the future):
-* Steam Turbine
-* Molten Salt Reactor (MSR)
-* Electrolyzer (Crucible Battery ?)
-* Cooling tower (Auxiliary variant ?)
-* Molten salt mixer ?
-* Melting Crucible (from salt to molten salt)
+<small><i><sup>(*)</sup> It's just Industry Multiblock,will seperate later in future update</i></small>
