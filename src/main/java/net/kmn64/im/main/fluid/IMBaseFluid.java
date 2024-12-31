@@ -2,13 +2,14 @@ package net.kmn64.im.main.fluid;
 
 import java.util.function.Consumer;
 
+import javax.annotation.Nullable;
+
 import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.util.GenericDeferredWork;
 import blusunrize.immersiveengineering.common.util.fluids.IEFluid;
 import net.kmn64.im.IMMain;
 import net.kmn64.im.main.IMContent;
-import net.kmn64.im.main.Nullable;
 import net.kmn64.im.main.block.IMFluidBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
