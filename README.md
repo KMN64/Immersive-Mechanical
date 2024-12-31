@@ -5,7 +5,7 @@
 ---
 
 # (Planning for the future - <em>2025?</em>)
-- Read todo.md
+- Todo.md
 - Planning to add Melting Crucible and Casting Basin<sup><small>(*)</small></sup> first
 
 <small><i><sup>(*)</sup> It's just Industry Multiblock,will seperate later in future update</i></small>
