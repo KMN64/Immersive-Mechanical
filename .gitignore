@@ -23,7 +23,6 @@ build
 # other
 eclipse
 run
-*.lock
 
 # Files from Forge MDK
 forge*changelog.txt
