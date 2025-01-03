@@ -1,10 +1,10 @@
-package net.kmn64.im.main.block;
+package net.kmn64.im.main.fluid;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Supplier;
-import net.kmn64.im.main.fluid.IMBaseFluid;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
@@ -20,7 +20,7 @@ import net.minecraft.state.StateHolder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class IMFluidBlock extends FlowingFluidBlock {
+public class IMBaseFluidBlock extends FlowingFluidBlock {
     private final IMBaseFluid fluid;
 	@Nullable
 	private Effect effect;
@@ -34,7 +34,7 @@ public class IMFluidBlock extends FlowingFluidBlock {
 		return () -> fluid;
 	}
 
-	public IMFluidBlock(IMBaseFluid fluid)
+	public IMBaseFluidBlock(IMBaseFluid fluid)
 	{
 		super(supply(fluid), Properties.of(Material.WATER));
 		this.fluid = fluid;

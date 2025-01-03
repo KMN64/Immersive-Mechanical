@@ -4,13 +4,10 @@ import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
-import blusunrize.immersiveengineering.common.IEContent;
 import blusunrize.immersiveengineering.common.util.GenericDeferredWork;
 import blusunrize.immersiveengineering.common.util.fluids.IEFluid;
 import net.kmn64.im.IMMain;
-import net.kmn64.im.main.IMContent;
-import net.kmn64.im.main.block.IMFluidBlock;
+import net.kmn64.im.main.IMRegister;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.FlowingFluid;
@@ -41,7 +38,7 @@ public class IMBaseFluid extends FlowingFluid {
 	protected IMBaseFluid source;
     @Nullable
 	protected final Consumer<FluidAttributes.Builder> buildAttributes;
-	public IMFluidBlock block;
+	public IMBaseFluidBlock block;
 	protected Item bucket;
 
 	public IMBaseFluid(String fluidName, ResourceLocation stillTex, ResourceLocation flowingTex, @Nullable Consumer<FluidAttributes.Builder> buildAttributes)
@@ -55,18 +52,18 @@ public class IMBaseFluid extends FlowingFluid {
 		this.stillTex = stillTex;
 		this.flowingTex = flowingTex;
 		this.buildAttributes = buildAttributes;
-		IMContent.IMFluids.put(fluidName, this);
+		//IMContent.registeredIMFluids.put(this);
 		if(!isSource)
 		{
 			flowing = this;
-			setRegistryName(ImmersiveEngineering.MODID, fluidName+"_flowing");
+			setRegistryName(IMMain.MODID, fluidName+"_flowing");
 		}
 		else
 		{
 			source = this;
-			this.block = new IMFluidBlock(this);
+			this.block = new IMBaseFluidBlock(this);
 			this.block.setRegistryName(IMMain.MODID, String.format("%s_block", fluidName));
-			//IEContent.registeredIEBlocks.add(this.block);
+			IMRegister.blockRegister(this.block);
 			this.bucket = new BucketItem(() -> this.source, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET))
 			    {
 				    @Override
@@ -75,11 +72,11 @@ public class IMBaseFluid extends FlowingFluid {
 					    return new FluidBucketWrapper(stack);
 				    }
                 };
-			this.bucket.setRegistryName(ImmersiveEngineering.MODID, String.format("%s_bucket", fluidName));
-			//IEContent.registeredIEItems.add(this.bucket);
+			this.bucket.setRegistryName(IMMain.MODID, String.format("%s_bucket", fluidName));
+			IMRegister.itemRegister(this.bucket);
 			GenericDeferredWork.registerDispenseBehavior(this.bucket, IEFluid.BUCKET_DISPENSE_BEHAVIOR);
 			flowing = createFlowingVariant();
-			setRegistryName(ImmersiveEngineering.MODID, fluidName);
+			setRegistryName(IMMain.MODID, fluidName);
 		}
 	}
 
