@@ -21,9 +21,7 @@ jobs:
                 distribution: 'temurin'
 
             - name: Setup Gradle
-              uses: gradle/actions/setup-gradle@v3
-              with:
-                gradle-version: 8.6
+              run: chmod +x gradlew
             - name: Compile IM
               run: ./gradlew --max-workers 1 compileJava
             - name: Compile Datagen
