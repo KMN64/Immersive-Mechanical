@@ -12,7 +12,12 @@ import net.minecraft.item.Item;
 public class IMMaterials {
     public static String[][][] materials = new String[][][]
     {
-        {{"Item"},{"test"}}
+        //{{"Item"},{"test"}}
+        {{"Sodium Chloride"},{"salt"}},
+        {{"Magnesium Chloride"},{"salt"}},
+        {{"Lithium Chloride"},{"salt"}},
+        {{"Calcium Chloride"},{"salt"}},
+        {{"Ammonium Chloride"},{"salt"}}
     };
 
     private static Item[] materials_exception = new Item[]
