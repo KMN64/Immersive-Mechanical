@@ -37,7 +37,7 @@ sourceSets {
 
 minecraft {
     mappings channel: mapping_channel, version: mapping_version
-    //enableEclipsePrepareRuns = true We don't need Eclipse prepare runs
+    //enableEclipsePrepareRuns = true We don't need Eclipse prepare run
     copyIdeResources = true
     generateRunFolders = true
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -66,7 +66,7 @@ minecraft {
 
         data {
             workingDirectory project.file('run-data')
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/'), '--existing-mod', 'immersiveengineering'
 
             mods {
                 "${mod_id}" {

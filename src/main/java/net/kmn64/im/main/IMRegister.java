@@ -19,25 +19,26 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidAttributes;
 
 public class IMRegister {
-    private static LinkedList<Fluid> registedIMFluids = new LinkedList<>();
-    private static LinkedList<Item> registedIMItems = new LinkedList<>();
-    private static LinkedList<Block> registedIMBlocks = new LinkedList<>();
+    private static final LinkedList<Fluid> registedIMFluids = new LinkedList<>();
+    private static final LinkedList<Item> registedIMItems = new LinkedList<>();
+    private static final LinkedList<Block> registedIMBlocks = new LinkedList<>();
 
-    public static void fluidRegister(String fluidName, ResourceLocation stillTex, ResourceLocation flowingTex, @Nullable Consumer<FluidAttributes.Builder> buildAttributes)
+    public static void fluidRegister(Fluid fluid)
     {
-        registedIMFluids.add(new IMBaseFluid(fluidName, stillTex, flowingTex, buildAttributes));
+        if (fluid != null)
+            registedIMFluids.add(fluid);
     }
-
-    
 
     public static void itemRegister(Item item)
     {
-        registedIMItems.add(item);
+        if (item != null)
+            registedIMItems.add(item);
     }
 
     public static void blockRegister(Block block)
     {
-        registedIMBlocks.add(block);
+        if (block != null)
+            registedIMBlocks.add(block);
     }
 
     public static LinkedList<Fluid> getRegistedFluid()

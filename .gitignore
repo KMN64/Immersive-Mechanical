@@ -24,7 +24,7 @@ build
 eclipse
 run
 run-data/*
-!run-data/im_crash_reports
+!run-data/im_datagen_done
 
 # Files from Forge MDK
 forge*changelog.txt

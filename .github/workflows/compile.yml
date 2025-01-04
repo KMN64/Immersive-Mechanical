@@ -27,7 +27,7 @@ jobs:
             - name: Compile Datagen
               run: ./gradlew --max-workers 1 runData || true
             - name: Check for crashes
-              run: bash -c "[ -f run-data/im_crash_reports ]"
+              run: bash -c "[ -f run-data/im_datagen_done ]"
 
 
             

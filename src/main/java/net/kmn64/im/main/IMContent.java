@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import net.kmn64.im.IMMain;
 import net.kmn64.im.main.fluid.IMBaseFluid;
 import net.kmn64.im.main.item.IMMaterials;
@@ -23,14 +24,21 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 public class IMContent {
     public static final Logger LOGGER = LogManager.getLogger(IMMain.MODID + "/Content");
 
+	/** Block/Item/Fluid population **/
     public static void populate(){
 		IMMaterials.register();
+		
     }
 
+	/** Pre-Initialization **/
     public static void preInit(){
 	}
 	
+	/** Initialization **/
 	public static void init(){
+		// For example
+		final TemplateMultiblock[] multiblocks = { /* AMultiblock.INSTANCE */};
+
 	}
 	
 	@SubscribeEvent

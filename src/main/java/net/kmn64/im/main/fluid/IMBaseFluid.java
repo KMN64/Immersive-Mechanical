@@ -8,6 +8,7 @@ import blusunrize.immersiveengineering.common.util.GenericDeferredWork;
 import blusunrize.immersiveengineering.common.util.fluids.IEFluid;
 import net.kmn64.im.IMMain;
 import net.kmn64.im.main.IMRegister;
+import net.kmn64.im.main.creativetabs.CTBucket;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.fluid.FlowingFluid;
@@ -52,7 +53,6 @@ public class IMBaseFluid extends FlowingFluid {
 		this.stillTex = stillTex;
 		this.flowingTex = flowingTex;
 		this.buildAttributes = buildAttributes;
-		//IMContent.registeredIMFluids.put(this);
 		if(!isSource)
 		{
 			flowing = this;
@@ -64,7 +64,7 @@ public class IMBaseFluid extends FlowingFluid {
 			this.block = new IMBaseFluidBlock(this);
 			this.block.setRegistryName(IMMain.MODID, String.format("%s_block", fluidName));
 			IMRegister.blockRegister(this.block);
-			this.bucket = new BucketItem(() -> this.source, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET))
+			this.bucket = new BucketItem(() -> this.source, new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET).tab(CTBucket.INSTANCE))
 			    {
 				    @Override
 				    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt)

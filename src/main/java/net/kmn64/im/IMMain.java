@@ -6,6 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
+import net.kmn64.im.main.IMContent;
+import net.kmn64.im.main.IMRegister;
+import net.kmn64.im.main.item.IMMaterials;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.item.ItemGroup;
@@ -36,6 +39,15 @@ public class IMMain
 	
 	//public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
+	// public static final ItemGroup CREATIVE_TAB = new ItemGroup(MODID)
+	// 		{
+
+	// 			@Override
+	// 			public ItemStack makeIcon() {
+	// 				return new ItemStack(null);
+	// 			}
+		
+	// 		};
 
     public IMMain() {
     	//ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, INEServerConfig.all,ImmersiveNuclearEngineering.MODID+"-server.toml");
@@ -43,6 +55,8 @@ public class IMMain
     	IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
     	eventBus.addListener(this::setup);
     	eventBus.addListener(this::loadComplete);
+
+		IMContent.populate();
 		
 		MinecraftForge.EVENT_BUS.addListener(this::serverStarting);
 		MinecraftForge.EVENT_BUS.addListener(this::serverAboutToStart);

@@ -7,20 +7,22 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 import net.kmn64.im.main.IMRegister;
+import net.kmn64.im.main.block.IMBaseBlock;
+import net.kmn64.im.main.creativetabs.CTMaterial;
 import net.minecraft.item.Item;
 
 public class IMMaterials {
-    public static String[][][] materials = new String[][][]
+    public static final String[][][] materials = new String[][][]
     {
         //{{"Item"},{"test"}}
-        {{"Sodium Chloride"},{"salt"}},
-        {{"Magnesium Chloride"},{"salt"}},
-        {{"Lithium Chloride"},{"salt"}},
-        {{"Calcium Chloride"},{"salt"}},
-        {{"Ammonium Chloride"},{"salt"}}
+        {{"Sodium Chloride"},{"Salt"}},
+        {{"Magnesium Chloride"},{"Salt"}},
+        {{"Lithium Chloride"},{"Salt"}},
+        {{"Calcium Chloride"},{"Salt"}},
+        {{"Ammonium Chloride"},{"Salt"}}
     };
 
-    private static Item[] materials_exception = new Item[]
+    private static final Item[] materials_exception = new Item[]
     {
 
     };
@@ -30,11 +32,24 @@ public class IMMaterials {
         for (String[][] materials : IMMaterials.materials) {
             String material = materials[0][0]; // Index thingy
             for (String part : materials[1]) {
-                String name = String.format("%s_%s", material.toLowerCase(), part);
-                Stream<Item> items = Arrays.stream(IMMaterials.materials_exception);
-                boolean isExcept = items.anyMatch((item)->item.getRegistryName().getPath()==name);
-                if (isExcept) IMRegister.itemRegister(new IMBaseItem(name)); else IMRegister.itemRegister(items.filter((item)->item.getRegistryName().getPath()==name).toArray(Item[]::new)[0]);
+                String name = String.format("%s_%s", material.toLowerCase().replaceAll("\\s", "_"), part.toLowerCase().replaceAll("\\s", "_"));
+                if (part=="block")
+                {
+                    IMRegister.blockRegister(new IMBaseBlock(name));
+                }
+                else
+                {
+                    boolean isExcept = Arrays.stream(IMMaterials.materials_exception).anyMatch((item)->item.getRegistryName().getPath()==name);
+                    Item[] items = Arrays.stream(IMMaterials.materials_exception).filter((item)->item.getRegistryName().getPath()==name).toArray(Item[]::new);
+                    if (isExcept) IMRegister.itemRegister(new IMBaseItem(name, new Item.Properties().tab(CTMaterial.INSTANCE))); else IMRegister.itemRegister(items.length>0 ? items[0] : null);
+                }
             }
         }
+    }
+
+    public static Item find(String material, String part)
+    {
+        String name = String.format("%s_%s", material.toLowerCase().replaceAll("\\s", "_"), part.toLowerCase().replaceAll("\\s", "_"));
+        return IMRegister.findItem(name);
     }
 }
