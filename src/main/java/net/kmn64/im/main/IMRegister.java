@@ -58,19 +58,31 @@ public class IMRegister {
 
     public static Fluid findFluid(String name)
     {
-        Fluid[] fluids = registedIMFluids.stream().filter((fluid)->fluid.getRegistryName().getPath()==name).toArray(Fluid[]::new);
+        Fluid[] fluids = registedIMFluids.stream().filter((fluid)->fluid.getRegistryName().getPath().equals(name)).toArray(Fluid[]::new);
         return fluids.length>0 ? fluids[0]: null;
     }
 
     public static Item findItem(String name)
     {
-        Item[] items = registedIMItems.stream().filter((item)->item.getRegistryName().getPath()==name).toArray(Item[]::new);
+        Item[] items = registedIMItems.stream().filter((item)->item.getRegistryName().getPath().equals(name)).toArray(Item[]::new);
         return items.length>0 ? items[0]: null;
     }
 
     public static Block findBlock(String name)
     {
-        Block[] blocks = registedIMBlocks.stream().filter((block)->block.getRegistryName().getPath()==name).toArray(Block[]::new);
+        Block[] blocks = registedIMBlocks.stream().filter((block)->block.getRegistryName().getPath().equals(name)).toArray(Block[]::new);
         return blocks.length>0 ? blocks[0]: null;
+    }
+
+    private static boolean checkResourceLocation(ResourceLocation rL, Item item)
+    {
+        if (rL==null || item==null) return false;
+        return checkResourceLocation(rL, item.getRegistryName());
+    }
+
+    private static boolean checkResourceLocation(ResourceLocation rL1, ResourceLocation rL2)
+    {
+        if (rL1==null||rL2==null) return false;
+        return rL1.getNamespace()==rL2.getNamespace() && rL1.getPath()==rL2.getPath();
     }
 }

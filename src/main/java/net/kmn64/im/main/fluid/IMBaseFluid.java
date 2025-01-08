@@ -56,7 +56,7 @@ public class IMBaseFluid extends FlowingFluid {
 		if(!isSource)
 		{
 			flowing = this;
-			setRegistryName(IMMain.MODID, fluidName+"_flowing");
+			setRegistryName(IMMain.MODID, String.format("%s_flowing", fluidName));
 		}
 		else
 		{

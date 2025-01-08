@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import net.kmn64.im.IMMain;
 import net.kmn64.im.main.fluid.IMBaseFluid;
@@ -36,9 +37,11 @@ public class IMContent {
 	
 	/** Initialization **/
 	public static void init(){
-		// For example
-		final TemplateMultiblock[] multiblocks = { /* AMultiblock.INSTANCE */};
-
+		// Multiblock Initialization
+		final TemplateMultiblock[] multiblocks = { };
+		for (TemplateMultiblock multiblock : multiblocks) {
+			MultiblockHandler.registerMultiblock(multiblock);
+		}
 	}
 	
 	@SubscribeEvent

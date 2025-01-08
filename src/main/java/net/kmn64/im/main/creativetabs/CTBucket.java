@@ -11,7 +11,7 @@ public class CTBucket extends ItemGroup {
     @SuppressWarnings("deprecation")
     public CTBucket()
     {
-        super(String.format("%s_MATERIAL",IMMain.MODID));
+        super(String.format("%s_BUCKET",IMMain.MODID));
         setBackgroundSuffix("item_search.png");
     }
 
