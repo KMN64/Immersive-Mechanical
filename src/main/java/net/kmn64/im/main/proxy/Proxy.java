@@ -17,6 +17,7 @@ import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
 
+// TODO: Add javadoc
 public interface Proxy {	
 	/** Fired at {@link FMLCommonSetupEvent} */
 	void setup(FMLCommonSetupEvent event);

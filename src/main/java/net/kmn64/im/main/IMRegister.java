@@ -1,23 +1,34 @@
 package net.kmn64.im.main;
 
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.function.Consumer;
-import java.util.function.IntFunction;
-import java.util.stream.Stream;
 
-import javax.annotation.Nullable;
-
-import net.kmn64.im.main.fluid.IMBaseFluid;
-import net.kmn64.im.main.item.IMBaseItem;
-import net.kmn64.im.main.item.IMMaterials;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.FluidAttributes;
 
+/**
+ * The IMRegister class is responsible for registering and managing custom Fluids, Items, and Blocks
+ * for the Immersive Mechanical mod. It provides methods to register these objects and retrieve them
+ * by name.
+ * 
+ * <p>It maintains three separate lists for registered Fluids, Items, and Blocks, and provides methods
+ * to add to these lists and retrieve objects from them.</p>
+ * 
+ * <p>Methods:</p>
+ * <ul>
+ *   <li>{@link #fluidRegister(Fluid)} - Registers a Fluid object.</li>
+ *   <li>{@link #itemRegister(Item)} - Registers an Item object.</li>
+ *   <li>{@link #blockRegister(Block)} - Registers a Block object.</li>
+ *   <li>{@link #getRegistedFluid()} - Returns the list of registered Fluids.</li>
+ *   <li>{@link #getRegistedItem()} - Returns the list of registered Items.</li>
+ *   <li>{@link #getRegistedBlock()} - Returns the list of registered Blocks.</li>
+ *   <li>{@link #findFluid(String)} - Finds a Fluid by its registry name.</li>
+ *   <li>{@link #findItem(String)} - Finds an Item by its registry name.</li>
+ *   <li>{@link #findBlock(String)} - Finds a Block by its registry name.</li>
+ * </ul>
+ * 
+ * <p>Note: The class uses LinkedList to store the registered objects.</p>
+ */
 public class IMRegister {
     private static final LinkedList<Fluid> registedIMFluids = new LinkedList<>();
     private static final LinkedList<Item> registedIMItems = new LinkedList<>();
@@ -72,17 +83,5 @@ public class IMRegister {
     {
         Block[] blocks = registedIMBlocks.stream().filter((block)->block.getRegistryName().getPath().equals(name)).toArray(Block[]::new);
         return blocks.length>0 ? blocks[0]: null;
-    }
-
-    private static boolean checkResourceLocation(ResourceLocation rL, Item item)
-    {
-        if (rL==null || item==null) return false;
-        return checkResourceLocation(rL, item.getRegistryName());
-    }
-
-    private static boolean checkResourceLocation(ResourceLocation rL1, ResourceLocation rL2)
-    {
-        if (rL1==null||rL2==null) return false;
-        return rL1.getNamespace()==rL2.getNamespace() && rL1.getPath()==rL2.getPath();
     }
 }

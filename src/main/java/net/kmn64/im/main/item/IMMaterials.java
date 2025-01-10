@@ -11,6 +11,10 @@ import net.kmn64.im.main.block.IMBaseBlock;
 import net.kmn64.im.main.creativetabs.CTMaterial;
 import net.minecraft.item.Item;
 
+/**
+ * The IMMaterials class is responsible for managing and registering various materials and their parts.
+ * It contains a predefined list of materials and provides methods to register and find items based on these materials.
+ */
 public class IMMaterials {
     public static final String[][][] materials = new String[][][]
     {
@@ -33,15 +37,12 @@ public class IMMaterials {
             String material = materials[0][0]; // Index thingy
             for (String part : materials[1]) {
                 String name = String.format("%s_%s", material.toLowerCase().replaceAll("\\s", "_"), part.toLowerCase().replaceAll("\\s", "_"));
-                if (part.toLowerCase().replaceAll("\\s", "_")=="block")
+                if (part.toLowerCase().replaceAll("\\s", "_").contains("block"))
                 {
                     IMRegister.blockRegister(new IMBaseBlock(name));
                 }
                 else
                 {
-                    // Is it possible ?
-                    //IMRegister.fakeitemRegister(new IMBaseItem(String.format("fake%s", name)));
-
                     boolean isExcept = Arrays.stream(IMMaterials.materials_exception).anyMatch((item)->item.getRegistryName().getPath()==name);
                     Item[] items = Arrays.stream(IMMaterials.materials_exception).filter((item)->item.getRegistryName().getPath()==name).toArray(Item[]::new);
                     if (!isExcept) IMRegister.itemRegister(new IMBaseItem(name, new Item.Properties().tab(CTMaterial.INSTANCE))); else IMRegister.itemRegister(items.length>0 ? items[0] : null);
