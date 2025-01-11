@@ -8,12 +8,9 @@ plugins {
 
 version = buildVersionString()
 group = mod_group_id
+base.archivesName = mod_id
 
-base {
-    archivesName = mod_id
-}
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Switch to java 8 for easy access
+java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Switch to Java 8 for easier compatibility
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 
 // Datagen stuff (why not ?)
@@ -120,33 +117,41 @@ tasks.named('processResources', ProcessResources).configure {
     }
 }
 
-// Example for how to get properties into the manifest for reading at runtime.
 tasks.named('jar', Jar).configure {
     manifest {
         attributes([
                 'Specification-Title'     : mod_id,
                 'Specification-Vendor'    : mod_authors,
-                'Specification-Version'   : buildVersionString(), // We are version 1 of ourselves
+                'Specification-Version'   : buildVersionString(),
                 'Implementation-Title'    : project.name,
                 'Implementation-Version'  : project.jar.archiveVersion,
                 'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': mod_date
+                'Implementation-Timestamp': getDateLastCommit()
         ])
 }
 
-// This is the preferred method to reobfuscate your jar file
     finalizedBy 'reobfJar'
 }
 
 String buildVersionString()
 {
-	return "${minecraft_version}-${mod_version}";
+    def lastCommitDateFormatted = getDateLastCommit()
+    return "${minecraft_version}-${mod_version}-${lastCommitDateFormatted}"
 }
 
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing:
-// tasks.named('publish').configure {
-//     dependsOn 'reobfJar'
-// }
+Date getDateLastCommit()
+{
+    // Get the date of the last commit
+    exec {
+        commandLine 'git', 'log', '-1', '--format=%cd', '--date=format:%Y%m%d'
+        standardOutput = new ByteArrayOutputStream()
+    }
+    return new Date(exec.standardOutput.toString().trim())
+}
+
+tasks.named('publish').configure {
+    dependsOn 'reobfJar'
+}
 
 def reobfFile = file("$buildDir/reobfJar/output.jar")
 def reobfArtifact = artifacts.add('default', reobfFile) { type 'jar'; builtBy 'reobfJar'; }
