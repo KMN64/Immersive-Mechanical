@@ -56,6 +56,7 @@ public class IMContent {
 	// The logger is initialized with the logger name "IM/Content".
 	// The logger name is formatted using the mod ID "IMMain.MODID".
 	// The logger is used to log errors that occur during the registration of content.
+	
     public static final Logger LOGGER = LogManager.getLogger(String.format("%s/Content",IMMain.MODID));
 
 	/**

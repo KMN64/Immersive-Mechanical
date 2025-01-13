@@ -1,10 +1,18 @@
 package net.kmn64.im.main.creativetabs;
 
+import javax.annotation.Nonnull;
+
 import net.kmn64.im.IMMain;
+import net.kmn64.im.main.item.IMBaseItem;
 import net.kmn64.im.main.item.IMMaterials;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * CTMaterial is a custom ItemGroup for organizing items related to materials in the mod.
@@ -32,7 +40,7 @@ public class CTMaterial extends ItemGroup {
 
     @Override
     public ItemStack makeIcon() {
-        return new ItemStack(IMMaterials.find("Sodium Chloride", "Salt"));
+        return new ItemStack(IMMaterials.find("Sodium Chloride", "salt"));
     }
 
     @Override

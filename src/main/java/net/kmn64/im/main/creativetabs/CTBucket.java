@@ -1,9 +1,17 @@
 package net.kmn64.im.main.creativetabs;
 
+import javax.annotation.Nonnull;
+
 import net.kmn64.im.IMMain;
 import net.kmn64.im.main.item.IMMaterials;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.api.distmarker.Dist;
 
 /**
  * CTBucket is a custom ItemGroup for the Immersive Mechanical mod.
@@ -39,7 +47,7 @@ public class CTBucket extends ItemGroup {
 
     @Override
     public ItemStack makeIcon() {
-        return new ItemStack(IMMaterials.find("Sodium Chloride", "Salt"));
+        return new ItemStack(null);
     }
 
     @Override

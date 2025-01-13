@@ -1,11 +1,14 @@
 package net.kmn64.im;
 
 
+import javax.annotation.Nonnull;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
+import blusunrize.immersiveengineering.ImmersiveEngineering;
 import net.kmn64.im.main.IMContent;
 import net.kmn64.im.main.IMRegister;
 import net.kmn64.im.main.item.IMMaterials;
@@ -15,7 +18,10 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -38,11 +44,26 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(IMMain.MODID)
 public class IMMain
 {
-	// Directly reference a mod ID
+	// Directly reference a modid value from Immersive Mechanical
+	/**
+	 * The unique identifier for the mod.
+	 * This ID is used to reference the mod in various contexts, such as configuration files and resource locations.
+	 */
 	public static final String MODID = "im";
-    // Directly reference a log4j logger.
-    public static final Logger LOGGER = LogManager.getLogger(MODID);
+
+	// Directly reference a log4j logger
+	/**
+	 * Logger instance for the main class of the Immersive Mechanical mod.
+	 * This logger is configured with the mod's ID and is used to log messages
+	 * related to the main functionality of the mod.
+	 */
+    public static final Logger LOGGER = LogManager.getLogger(String.format("%s/Main",MODID));
 	
+	/**
+	 * A proxy instance that is initialized based on the distribution environment.
+	 * If the environment is client-side, an instance of {@link ClientProxy} is created.
+	 * Otherwise, an instance of {@link CommonProxy} is created.
+	 */
 	public static CommonProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public IMMain() {

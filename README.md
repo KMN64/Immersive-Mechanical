@@ -17,48 +17,47 @@
 
 | Content to Implement | Multiblocks Name | Status | Features | Notes |
 |----------------------|------------------|--------|----------|-------|
-| Models things | Distiller |<ul><li>- **[ ]** </li></ul>| *Distill liquids* | (WIP) |
-| Models things | Electrolyzer (Basic) |<ul><li>- [ ] </li></ul>| *Electrolyze liquids* | *None* |
-| Models things | Electrolyzer (Industrial) |<ul><li>- *[ ]* </li></ul>| *Electrolyze liquids* | *None* |
-| Models things | Electrolytic Crucible Battery |<ul><li>- [ ] </li></ul>| *Electrolyze liquids* | *None* |
-| Models things | Melting Crucible |<ul><li>- **[ ]** </li></ul>| *Melting liquids* | (WIP) |
-| Models things | Casting Basin |<ul><li>- *[ ]* </li></ul>| *Casting liquids* | *None* |
-| Models things | Steam Turbine |<ul><li>- *[ ]* </li></ul>| *Generate Energy* | *None* |
-| Models things | Wellhead |<ul><li>- *[ ]* </li></ul>| *Pump Liquids* | *None* |
-| Models things | Geothermal Wellhead |<ul><li>- *[ ]* </li></ul>| *Pump Liquids* | *None* |
-| Models things | Heat Exchanger |<ul><li>- *[ ]* </li></ul>| *Heat Exchanger* | *None* |
-| Models things | Condenser |<ul><li>- *[ ]* </li></ul>| *Condense liquids* | *None* |
-| Models things | Cooling Tower |<ul><li>- *[ ]* </li></ul>| *Cooling liquids* | *None* |
+| Models things | Distiller | [x] | *Distill liquids* | (WIP) |
+| Models things | Electrolyzer (Basic) | [ ] | *Electrolyze liquids* | *None* |
+| Models things | Electrolyzer (Industrial) | *[ ]* | *Electrolyze liquids* | *None* |
+| Models things | Electrolytic Crucible Battery | [ ] | *Electrolyze liquids* | *None* |
+| Models things | Melting Crucible | **[ ]** | *Melting liquids* | (WIP) |
+| Models things | Casting Basin | *[ ]* | *Casting liquids* | *None* |
+| Models things | Steam Turbine | *[ ]* | *Generate Energy* | *None* |
+| Models things | Wellhead | *[ ]* | *Pump Liquids* | *None* |
+| Models things | Geothermal Wellhead | *[ ]* | *Pump Liquids* | *None* |
+| Models things | Heat Exchanger | *[ ]* | *Heat Exchanger* | *None* |
+| Models things | Condenser | *[ ]* | *Condense liquids* | *None* |
+| Models things | Cooling Tower | *[ ]* | *Cooling liquids* | *None* |
 |--|--|--|--|--|
-| Code things | Distiller |<ul><li>- **[ ]** </li></ul>| *Distill liquids* | (WIP) |
-| Code things | Electrolyzer (Basic) |<ul><li>- [ ] </li></ul>| *Electrolyze liquids* | *None* |
-| Code things | Electrolyzer (Industrial) |<ul><li>- *[ ]* </li></ul>| *Electrolyze liquids* | *None* |
-| Code things | Electrolytic Crucible Battery |<ul><li>- [ ] </li></ul>| *Electrolyze liquids* | *None* |
-| Code things | Melting Crucible |<ul><li>- **[ ]** </li></ul>| *Melting liquids* | (WIP) |
-| Code things | Casting Basin |<ul><li>- *[ ]* </li></ul>| *Casting liquids* | *None* |
-| Code things | Steam Turbine |<ul><li>- *[ ]* </li></ul>| *Generate Energy* | *None* |
-| Code things | Wellhead |<ul><li>- *[ ]* </li></ul>| *Pump Liquids* | *None* |
-| Code things | Geothermal Wellhead |<ul><li>- *[ ]* </li></ul>| *Pump Liquids* | *None* |
-| Code things | Heat Exchanger |<ul><li>- **[ ]** </li></ul>| *Heat Exchanger* | Focusing on using fluids as a heat source and heat sink,not energy |
-| Code things | Condenser |<ul><li>- *[ ]* </li></ul>| *Condense liquids* | *None* |
-| Code things | Cooling Tower |<ul><li>- *[ ]* </li></ul>| *Cooling liquids* | *None* |
-| Code things | Fluid Steam System |<ul><li>- *[ ]* </li></ul>| *Fluid Steam System* | *None* |
+| Code things | Distiller | **[ ]** | *Distill liquids* | (WIP) |
+| Code things | Electrolyzer (Basic) | [ ] | *Electrolyze liquids* | *None* |
+| Code things | Electrolyzer (Industrial) | *[ ]* | *Electrolyze liquids* | *None* |
+| Code things | Electrolytic Crucible Battery | [ ] | *Electrolyze liquids* | *None* |
+| Code things | Melting Crucible | **[ ]** | *Melting liquids* | (WIP) |
+| Code things | Casting Basin | *[ ]* | *Casting liquids* | *None* |
+| Code things | Steam Turbine | *[ ]* | *Generate Energy* | *None* |
+| Code things | Wellhead | *[ ]* | *Pump Liquids* | *None* |
+| Code things | Geothermal Wellhead | *[ ]* | *Pump Liquids* | *None* |
+| Code things | Heat Exchanger | **[ ]** | *Heat Exchanger* | Focusing on using fluids as a heat source and heat sink,not energy |
+| Code things | Condenser | *[ ]* | *Condense liquids* | *None* |
+| Code things | Cooling Tower | *[ ]* | *Cooling liquids* | *None* |
+| Code things | Fluid Steam System | ~~[ ]~~ | *Fluid Steam System* | *None* |
 |--|--|--|--|--|
-| Manual things | Distiller |<ul><li>- *[ ]* </li></ul>| *Distill liquids* | *None* |
-| Manual things | Electrolyzer (Basic) |<ul><li>- [ ] </li></ul>| *Electrolyze liquids* | *None* |
-| Manual things | Electrolyzer (Industrial) |<ul><li>- *[ ]* </li></ul>| *Electrolyze liquids* | *None* |
-| Manual things | Electrolytic Crucible Battery |<ul><li>- [ ] </li></ul>| *Electrolyze liquids* | *None* |
-| Manual things | Melting Crucible |<ul><li>- **[ ]** </li></ul>| *Melting liquids* | (WIP) |
-| Manual things | Casting Basin |<ul><li>- *[ ]* </li></ul>| *Casting liquids* | *None* |
-| Manual things | Steam Turbine |<ul><li>- *[ ]* </li></ul>| *Generate Energy* | *None* |
-| Manual things | Wellhead |<ul><li>- *[ ]* </li></ul>| *Pump Liquids* | *None* |
-| Manual things | Geothermal Wellhead |<ul><li>- *[ ]* </li></ul>| *Pump Liquids* | *None* |
-| Manual things | Heat Exchanger |<ul><li>- *[ ]* </li></ul>| *Heat Exchanger* | *None* |
-| Manual things | Condenser |<ul><li>- *[ ]* </li></ul>| *Condense liquids* | *None* |
-| Manual things | Cooling Tower |<ul><li>- *[ ]* </li></ul>| *Cooling liquids* | *None* |
-| Manual things | Fluid Steam System |<ul><li>- *[ ]* </li></ul>| *Fluid Steam System* | Planning later |
+| Manual things | Distiller | *[ ]* | *Distill liquids* | *None* |
+| Manual things | Electrolyzer (Basic) | [ ] | *Electrolyze liquids* | *None* |
+| Manual things | Electrolyzer (Industrial) | *[ ]* | *Electrolyze liquids* | *None* |
+| Manual things | Electrolytic Crucible Battery | [ ] | *Electrolyze liquids* | *None* |
+| Manual things | Melting Crucible | **[ ]** | *Melting liquids* | (WIP) |
+| Manual things | Casting Basin | *[ ]* | *Casting liquids* | *None* |
+| Manual things | Steam Turbine | *[ ]* | *Generate Energy* | *None* |
+| Manual things | Wellhead | *[ ]* | *Pump Liquids* | *None* |
+| Manual things | Geothermal Wellhead | *[ ]* | *Pump Liquids* | *None* |
+| Manual things | Heat Exchanger | *[ ]* | *Heat Exchanger* | *None* |
+| Manual things | Condenser | *[ ]* | *Condense liquids* | *None* |
+| Manual things | Cooling Tower | *[ ]* | *Cooling liquids* | *None* |
+| Manual things | Fluid Steam System | ~~[ ]~~ | *Fluid Steam System* | *None* |
 |--|--|--|--|--|
-
 
 ## Credits
 

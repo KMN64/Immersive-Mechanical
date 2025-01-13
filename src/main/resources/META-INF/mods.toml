@@ -1,6 +1,7 @@
 modLoader="javafml"
+loaderVersion="${loader_version_range}"
 license="${mod_license}"
-issueTrackerURL="https://github.com/KMN64/Immersive-Nuclear-Engineering/issues"
+issueTrackerURL="https://github.com/KMN64/Immersive-Mechanical/issues"
 [[mods]]
 modId="${mod_id}"
 version="${mod_version}"
@@ -10,7 +11,7 @@ displayURL="https://github.com/KMN64/Immersive-Mechanical"
 logoFile="${mod_id}logo.png"
 credits="Kmn64"
 authors="${mod_authors}"
-description='''${mod_description}'''
+description=${mod_description}
 [[dependencies.${mod_id}]]
 	modId="forge"
 	mandatory=true

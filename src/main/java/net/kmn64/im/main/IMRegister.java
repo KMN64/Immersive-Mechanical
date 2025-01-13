@@ -2,6 +2,8 @@ package net.kmn64.im.main;
 
 import java.util.LinkedList;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -67,18 +69,39 @@ public class IMRegister {
         return registedIMBlocks;
     }
 
+    /**
+     * Finds and returns a Fluid object by its name.
+     *
+     * @param name the name of the fluid to find
+     * @return the Fluid object if found, otherwise null
+     */
+    @Nullable
     public static Fluid findFluid(String name)
     {
         Fluid[] fluids = registedIMFluids.stream().filter((fluid)->fluid.getRegistryName().getPath().equals(name)).toArray(Fluid[]::new);
         return fluids.length>0 ? fluids[0]: null;
     }
 
+    /**
+     * Finds an item by its registry name.
+     *
+     * @param name the registry name of the item to find
+     * @return the item with the specified registry name, or null if no such item is found
+     */
+    @Nullable
     public static Item findItem(String name)
     {
         Item[] items = registedIMItems.stream().filter((item)->item.getRegistryName().getPath().equals(name)).toArray(Item[]::new);
         return items.length>0 ? items[0]: null;
     }
 
+    /**
+     * Finds a block by its registry name.
+     *
+     * @param name The name of the block to find.
+     * @return The block with the specified name, or null if no such block is found.
+     */
+    @Nullable
     public static Block findBlock(String name)
     {
         Block[] blocks = registedIMBlocks.stream().filter((block)->block.getRegistryName().getPath().equals(name)).toArray(Block[]::new);
