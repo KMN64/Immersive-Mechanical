@@ -11,7 +11,6 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import blusunrize.immersiveengineering.ImmersiveEngineering;
 import net.kmn64.im.main.IMContent;
 import net.kmn64.im.main.IMRegister;
-import net.kmn64.im.main.item.IMMaterials;
 import net.kmn64.im.main.proxy.ClientProxy;
 import net.kmn64.im.main.proxy.CommonProxy;
 import net.minecraft.command.CommandSource;

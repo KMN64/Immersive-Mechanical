@@ -10,7 +10,6 @@ import blusunrize.immersiveengineering.common.blocks.generic.MultiblockPartTileE
 import blusunrize.immersiveengineering.common.blocks.metal.MetalMultiblockBlock;
 import net.kmn64.im.IMMain;
 import net.kmn64.im.main.IMRegister;
-import net.kmn64.im.main.creativetabs.CreativeTab;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
@@ -35,7 +34,7 @@ public class IMMultiblockBlock<T extends MultiblockPartTileEntity<T>> extends Me
 
         IMRegister.blockRegister(this);
 		
-		BlockItem bItem = new BlockItemIE(this, new Item.Properties().tab(CreativeTab.INSTANCE));
+		BlockItem bItem = new BlockItemIE(this, new Item.Properties());
 		IMRegister.itemRegister(bItem.setRegistryName(getRegistryName()));
     }
 

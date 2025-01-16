@@ -10,7 +10,8 @@ import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import net.kmn64.im.IMMain;
 import net.kmn64.im.main.fluid.IMBaseFluid;
-import net.kmn64.im.main.item.IMMaterials;
+import net.kmn64.im.main.item.materialsystem.system.IMMaterialSystem;
+import net.kmn64.im.main.item.materialsystem.system.IMMaterialSystemRegister;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
@@ -66,7 +67,7 @@ public class IMContent {
 	 */
     public static void populate(){
 		// Register materials
-		IMMaterials.register();
+		IMMaterialSystemRegister.register();
     }
 
 

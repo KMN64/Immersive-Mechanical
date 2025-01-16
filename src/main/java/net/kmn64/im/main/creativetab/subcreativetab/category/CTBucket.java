@@ -1,17 +1,10 @@
-package net.kmn64.im.main.creativetabs;
-
-import javax.annotation.Nonnull;
+package net.kmn64.im.main.creativetab.subcreativetab.category;
 
 import net.kmn64.im.IMMain;
-import net.kmn64.im.main.item.IMMaterials;
+import net.kmn64.im.main.creativetab.IMCreativeTab;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.api.distmarker.Dist;
+import net.minecraft.util.Tuple;
 
 /**
  * CTBucket is a custom ItemGroup for the Immersive Mechanical mod.
@@ -35,23 +28,22 @@ import net.minecraftforge.api.distmarker.Dist;
  * 
  * @see net.minecraft.item.ItemGroup
  */
-public class CTBucket extends ItemGroup {
+public class CTBucket extends IMCreativeTab {
     public static final CTBucket INSTANCE = new CTBucket();
 
-    @SuppressWarnings("deprecation")
     public CTBucket()
     {
-        super(String.format("%s_BUCKET",IMMain.MODID));
-        setBackgroundSuffix("item_search.png");
+        super();
     }
 
     @Override
-    public ItemStack makeIcon() {
-        return new ItemStack(null);
+    public Item getItem() {
+        return null;
     }
 
+    @SuppressWarnings("null")
     @Override
-    public boolean hasSearchBar() {
-        return true;
+    public Tuple<Boolean, ResourceLocation> getSearchBar() {
+        return new Tuple<>(false,null);
     }
 }
